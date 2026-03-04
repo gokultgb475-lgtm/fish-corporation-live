@@ -607,6 +607,10 @@ const aiChatLimiter = createRateLimiter({
 
 app.use('/api', apiLimiter);
 
+app.get('/healthz', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     ok: true,
@@ -1072,6 +1076,27 @@ app.get('/api/reports/website-audit', (req, res) => {
 
 app.use('/reports', express.static(reportsDir));
 app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/:page', (req, res, next) => {
+  const page = String(req.params.page || '').trim();
+
+  if (!/^[a-zA-Z0-9_-]+$/.test(page)) {
+    return next();
+  }
+  if (page === 'api' || page === 'reports') {
+    return next();
+  }
+
+  const pagePath = path.join(__dirname, `${page}.html`);
+  if (!fs.existsSync(pagePath)) {
+    return next();
+  }
+  return res.sendFile(pagePath);
+});
 
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api/')) {
