@@ -32,6 +32,7 @@ body {
   min-height: 100%;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -203,23 +204,47 @@ body.scrolled .site-header .nav-shell {
 }
 
 .nav-cart-link {
-  display: none;
-  border: 1px solid rgba(211, 232, 250, 0.55);
-  border-radius: 999px;
-  background: rgba(12, 40, 72, 0.4);
-  color: rgba(241, 249, 255, 0.98);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: rgba(239, 248, 255, 0.96);
   font: inherit;
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: clamp(0.88rem, 1.05vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
   cursor: pointer;
-  padding: 0.38rem 0.72rem;
+  padding: 0.28rem 0;
   margin-left: 0.35rem;
+  position: relative;
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+.nav-cart-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.24rem;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(120deg, #f6fbff, #88d8f2);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 190ms ease;
 }
 
 .nav-cart-link:hover {
   color: #ffffff;
-  border-color: rgba(224, 243, 255, 0.82);
-  background: rgba(12, 48, 82, 0.58);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.nav-cart-link:hover::after {
+  transform: scaleX(1);
 }
 
 .site-header [data-back-btn] {
@@ -266,8 +291,8 @@ body.scrolled .site-header .nav-shell {
 .hero-cinema {
   position: relative;
   margin-top: 0;
-  height: 100vh;
-  min-height: 100vh;
+  height: 100svh;
+  min-height: 100svh;
   border-radius: 0;
   overflow: hidden;
   box-shadow: none;
@@ -286,7 +311,8 @@ body.scrolled .site-header .nav-shell {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.9) contrast(1.04) brightness(0.58);
+  object-position: center center;
+  filter: saturate(1.02) contrast(1.06) brightness(0.68);
   transform: scale(1.04);
   animation: videoPan 46s linear infinite;
 }
@@ -295,8 +321,8 @@ body.scrolled .site-header .nav-shell {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(102deg, rgba(4, 12, 22, 0.72) 0%, rgba(4, 21, 38, 0.56) 45%, rgba(4, 21, 38, 0.2) 82%, rgba(4, 21, 38, 0.06) 100%),
-    linear-gradient(180deg, rgba(3, 10, 18, 0.22) 0%, rgba(3, 10, 18, 0.4) 100%);
+    linear-gradient(102deg, rgba(4, 12, 22, 0.64) 0%, rgba(4, 21, 38, 0.48) 45%, rgba(4, 21, 38, 0.18) 82%, rgba(4, 21, 38, 0.06) 100%),
+    linear-gradient(180deg, rgba(3, 10, 18, 0.16) 0%, rgba(3, 10, 18, 0.33) 100%);
   transition: opacity 160ms linear;
 }
 
@@ -1121,8 +1147,15 @@ textarea:focus {
   }
 
   .hero-cinema {
-    height: 100vh;
-    min-height: 100vh;
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  @supports (height: 100dvh) {
+    .hero-cinema {
+      height: 100dvh;
+      min-height: 100dvh;
+    }
   }
 
   .hero-cinema-content {
@@ -1214,9 +1247,16 @@ textarea:focus {
   }
 
   .hero-cinema {
-    height: 100vh;
-    min-height: 100vh;
+    height: 100svh;
+    min-height: 100svh;
     border-radius: 0;
+  }
+
+  @supports (height: 100dvh) {
+    .hero-cinema {
+      height: 100dvh;
+      min-height: 100dvh;
+    }
   }
 
   .hero-cinema-content h1 {
@@ -1636,6 +1676,12 @@ textarea:focus {
   margin-left: 0.35rem;
 }
 
+.home-page .nav-cart-link {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 1.08vw, 1.18rem);
+  color: rgba(243, 248, 255, 0.98);
+}
+
 .home-page .nav-links a {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1rem, 1.08vw, 1.18rem);
@@ -1672,14 +1718,15 @@ textarea:focus {
 }
 
 .home-page .hero-video {
-  filter: saturate(0.82) contrast(1) brightness(0.57);
-  transform: scale(1.03);
+  object-position: center center;
+  filter: saturate(1.08) contrast(1.1) brightness(0.78);
+  transform: scale(1.02);
 }
 
 .home-page .hero-overlay {
   background:
-    linear-gradient(98deg, rgba(3, 12, 22, 0.74) 0%, rgba(3, 12, 22, 0.56) 40%, rgba(3, 12, 22, 0.24) 74%, rgba(3, 12, 22, 0.08) 100%),
-    linear-gradient(180deg, rgba(2, 8, 15, 0.28) 0%, rgba(2, 8, 15, 0.42) 100%);
+    linear-gradient(98deg, rgba(3, 12, 22, 0.58) 0%, rgba(3, 12, 22, 0.44) 40%, rgba(3, 12, 22, 0.2) 74%, rgba(3, 12, 22, 0.08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 15, 0.18) 0%, rgba(2, 8, 15, 0.32) 100%);
 }
 
 .home-page .hero-cinema-content {
@@ -1767,6 +1814,10 @@ textarea:focus {
 }
 
 @media (max-width: 720px) {
+  .home-page .hero-video {
+    transform: scale(1.01);
+  }
+
   .home-page .hero-cinema-content {
     padding:
       clamp(4.9rem, 10vh, 6rem)

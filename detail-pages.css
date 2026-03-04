@@ -25,6 +25,7 @@ body {
   min-height: 100%;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -876,7 +877,7 @@ select:focus {
 .home-ui-page .hero {
   margin-top: 0;
   border-radius: 0;
-  min-height: 100vh;
+  min-height: 100svh;
   padding:
     clamp(5.8rem, 12vh, 8.2rem)
     clamp(1rem, 3vw, 3rem)
