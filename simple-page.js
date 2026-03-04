@@ -7,8 +7,8 @@
   });
 
   const nodes = document.querySelectorAll('.reveal');
-  nodes.forEach((node, index) => {
-    node.style.transitionDelay = `${Math.min(index * 50, 300)}ms`;
+  nodes.forEach((node) => {
+    node.style.transitionDelay = '0ms';
   });
 
   if (!('IntersectionObserver' in window)) {

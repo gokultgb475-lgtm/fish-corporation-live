@@ -1,4 +1,11 @@
 (function () {
+  const TOP_NAV_ITEMS = [
+    { href: '/ecosystem.html', label: 'Ecosystem' },
+    { href: '/marketplace.html', label: 'Marketplace' },
+    { href: '/technology.html', label: 'Technology' },
+    { href: '/community.html', label: 'Community' }
+  ];
+
   function updateScrollEffects() {
     const scrollY = window.scrollY || 0;
     const maxScroll = Math.max((document.documentElement.scrollHeight || 1) - window.innerHeight, 1);
@@ -32,47 +39,71 @@
   function goBackWithFallback() {
     const fallback = '/';
     if (window.history.length > 1 && document.referrer) {
-      document.body.classList.add('page-leaving');
-      setTimeout(() => window.history.back(), 170);
+      window.history.back();
       return;
     }
-    document.body.classList.add('page-leaving');
-    setTimeout(() => {
-      window.location.href = fallback;
-    }, 170);
+    window.location.href = fallback;
   }
 
-  document.querySelectorAll('[data-back-btn]').forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      goBackWithFallback();
-    });
-  });
+  function buildTopNav() {
+    const nav = document.createElement('nav');
+    nav.className = 'nav-links';
+    nav.setAttribute('aria-label', 'Primary navigation');
+    nav.innerHTML = TOP_NAV_ITEMS.map((item) => `<a href="${item.href}">${item.label}</a>`).join('');
+    return nav;
+  }
+
+  function ensureTopTopicsOnHome() {
+    const homeNav = document.querySelector('.site-header .nav-links');
+    if (!(homeNav instanceof HTMLElement)) return;
+    homeNav.innerHTML = TOP_NAV_ITEMS.map((item) => `<a href="${item.href}">${item.label}</a>`).join('');
+  }
+
+  function ensureTopNavOnDetailPages() {
+    const topbar = document.querySelector('.topbar');
+    if (!(topbar instanceof HTMLElement)) return;
+    if (topbar.querySelector('.nav-links')) return;
+
+    const nav = buildTopNav();
+    const actions = topbar.querySelector('.top-actions');
+    if (actions instanceof HTMLElement) {
+      topbar.insertBefore(nav, actions);
+      return;
+    }
+    topbar.appendChild(nav);
+  }
+
+  function ensureBackButton() {
+    if (document.querySelector('[data-back-btn]')) return;
+
+    const navShell = document.querySelector('.site-header .nav-shell');
+    const topbar = document.querySelector('.topbar');
+    const target = navShell || topbar;
+    if (!(target instanceof HTMLElement)) return;
+
+    const actions = document.createElement('div');
+    actions.className = 'top-actions auto-top-actions';
+    actions.innerHTML = '<button class="btn btn-light global-back-btn" type="button" data-back-btn aria-label="Go back">Back</button>';
+    target.appendChild(actions);
+  }
 
   document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const backBtn = target.closest('[data-back-btn]');
+    if (backBtn) {
+      event.preventDefault();
+      goBackWithFallback();
+      return;
+    }
+
     if (event.defaultPrevented) return;
-    if (event.button !== 0) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    const anchor = event.target.closest('a[href]');
-    if (!anchor) return;
-    if (anchor.target && anchor.target !== '_self') return;
-    if (anchor.hasAttribute('download')) return;
-
-    const href = anchor.getAttribute('href') || '';
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-
-    const target = new URL(href, window.location.href);
-    if (target.origin !== window.location.origin) return;
-    if (target.pathname === window.location.pathname && target.search === window.location.search) return;
-
-    event.preventDefault();
-    document.body.classList.add('page-leaving');
-    setTimeout(() => {
-      window.location.href = target.href;
-    }, 170);
   });
 
+  ensureTopTopicsOnHome();
+  ensureTopNavOnDetailPages();
+  ensureBackButton();
   window.addEventListener('scroll', queueScrollEffects, { passive: true });
   window.addEventListener('resize', queueScrollEffects);
   queueScrollEffects();

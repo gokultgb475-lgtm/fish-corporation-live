@@ -497,8 +497,8 @@ async function submitCheckout(event) {
 
 function setupReveal() {
   const nodes = document.querySelectorAll('.reveal');
-  nodes.forEach((node, index) => {
-    node.style.transitionDelay = `${Math.min(index * 40, 360)}ms`;
+  nodes.forEach((node) => {
+    node.style.transitionDelay = '0ms';
   });
   if (!('IntersectionObserver' in window)) {
     nodes.forEach((node) => node.classList.add('visible'));
