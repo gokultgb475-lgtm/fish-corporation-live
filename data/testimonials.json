@@ -4,20 +4,20 @@
     "name": "AquaSouth Collective",
     "role": "Farmer Network",
     "quote": "Tech + field guidance + transportation support made our operations more predictable and profitable.",
-    "image": "/images/live-transport/workflow/tile-4.jpg"
+    "image": "/images/freshwater/photos/murrel.jpg"
   },
   {
     "id": "t-4",
     "name": "P Gokulpriyan",
     "role": "Freshwater Operations",
     "quote": "Order tracking and status updates made procurement planning easier for our daily fish supply.",
-    "image": "/images/live-transport/workflow/tile-7.jpg"
+    "image": "/images/freshwater/photos/catla.jpg"
   },
   {
     "id": "t-5",
     "name": "R Jaiakshith",
     "role": "Supply Chain Operations",
     "quote": "Freshwater-only listing, clear pricing, and quick delivery coordination improved our order confidence.",
-    "image": "/images/live-transport/workflow/tile-9.jpg"
+    "image": "/images/freshwater/photos/koi.jpg"
   }
 ]

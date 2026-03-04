@@ -6,7 +6,7 @@
     "weightOptions": ["1 kg", "3 kg", "10 kg"],
     "price": 320,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-1.jpg",
+    "image": "/images/freshwater/photos/rohu.jpg",
     "description": "Farm-monitored freshwater rohu with stable daily supply."
   },
   {
@@ -16,7 +16,7 @@
     "weightOptions": ["2 kg", "5 kg", "20 kg"],
     "price": 360,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-2.jpg",
+    "image": "/images/freshwater/photos/catla.jpg",
     "description": "Bulk-ready catla for hotels, canteens, and wholesale buyers."
   },
   {
@@ -26,7 +26,7 @@
     "weightOptions": ["1 kg", "2 kg", "5 kg"],
     "price": 295,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-3.jpg",
+    "image": "/images/freshwater/photos/tilapia.jpg",
     "description": "Healthy freshwater tilapia harvested with controlled farm practices."
   },
   {
@@ -36,7 +36,7 @@
     "weightOptions": ["1 kg", "3 kg", "8 kg"],
     "price": 245,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-4.jpg",
+    "image": "/images/freshwater/photos/pangasius.jpg",
     "description": "Economical freshwater pangasius for retail and food service."
   },
   {
@@ -46,7 +46,7 @@
     "weightOptions": ["1 kg", "2 kg", "4 kg"],
     "price": 680,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-5.jpg",
+    "image": "/images/freshwater/photos/murrel.jpg",
     "description": "High-value murrel sourced from selected freshwater partners."
   },
   {
@@ -56,7 +56,7 @@
     "weightOptions": ["1 kg", "3 kg", "6 kg"],
     "price": 560,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-6.jpg",
+    "image": "/images/freshwater/photos/magur.jpg",
     "description": "Freshwater magur for premium live-fish demand."
   },
   {
@@ -66,7 +66,7 @@
     "weightOptions": ["1 kg", "2 kg", "6 kg"],
     "price": 230,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-7.jpg",
+    "image": "/images/freshwater/photos/silver-carp.jpg",
     "description": "Affordable and consistent freshwater silver carp supply."
   },
   {
@@ -76,7 +76,7 @@
     "weightOptions": ["1 kg", "2 kg", "7 kg"],
     "price": 265,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-8.jpg",
+    "image": "/images/freshwater/photos/common-carp.jpg",
     "description": "High-demand common carp with predictable bulk availability."
   },
   {
@@ -86,7 +86,7 @@
     "weightOptions": ["1 kg", "3 kg", "8 kg"],
     "price": 255,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-9.jpg",
+    "image": "/images/freshwater/photos/grass-carp.jpg",
     "description": "Freshwater grass carp ideal for price-sensitive retail channels."
   },
   {
@@ -96,7 +96,7 @@
     "weightOptions": ["1 kg", "2 kg", "5 kg"],
     "price": 275,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-10.jpg",
+    "image": "/images/freshwater/photos/bata.jpg",
     "description": "Freshwater bata fish sourced from monitored inland farms."
   },
   {
@@ -106,7 +106,7 @@
     "weightOptions": ["1 kg", "2 kg", "4 kg"],
     "price": 420,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-11.jpg",
+    "image": "/images/freshwater/photos/koi.jpg",
     "description": "Koi fish lot with quality grading and cold-chain compliance."
   },
   {
@@ -116,7 +116,7 @@
     "weightOptions": ["1 kg", "2 kg", "5 kg"],
     "price": 470,
     "unit": "kg",
-    "image": "/images/live-transport/workflow/tile-12.jpg",
+    "image": "/images/freshwater/photos/knife-fish.jpg",
     "description": "Premium freshwater knife fish for specialty demand."
   },
   {
@@ -126,7 +126,7 @@
     "weightOptions": ["100 units", "500 units", "1000 units"],
     "price": 1200,
     "unit": "pack",
-    "image": "/images/live-transport/workflow/tile-6.jpg",
+    "image": "/images/freshwater/photos/fingerlings.jpg",
     "description": "Disease-screened freshwater seed and fingerlings for pond stocking."
   },
   {
@@ -136,7 +136,7 @@
     "weightOptions": ["25 kg", "50 kg"],
     "price": 1850,
     "unit": "bag",
-    "image": "/images/live-transport/workflow/tile-10.jpg",
+    "image": "/images/freshwater/photos/feed.jpg",
     "description": "Balanced feed formula designed for freshwater growth cycles."
   }
 ]
