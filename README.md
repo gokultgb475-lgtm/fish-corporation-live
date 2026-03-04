@@ -29,7 +29,7 @@ Project path:
 - Technology: `/technology.html`
 - Community: `/community.html`
 - Contact: `/contact.html`
-- Admin panel: `/admin.html`
+- Admin panel: `/admin`
 - Shop: `/shop.html`
 - Track order: `/track-order.html`
 
@@ -56,7 +56,7 @@ Open:
 `http://localhost:4080`
 
 ## Admin Login
-Use the `ADMIN_KEY` from `.env` inside `/admin.html`.
+Use the `ADMIN_KEY` from `.env` inside `/admin`.
 
 ## SMS / WhatsApp setup
 Add Twilio values in `.env`:
@@ -75,4 +75,4 @@ If these are missing, orders still work but notification logs show skipped/faile
    - Sandbox: users must send join code once from their WhatsApp.
    - Production sender: Meta approval required.
 4. Set `TWILIO_WHATSAPP_FROM` (example: `whatsapp:+14155238886` for sandbox).
-5. Update an order status to `confirmed` in `/admin.html` and verify SMS delivery + notification logs.
+5. Update an order status to `confirmed` in `/admin` and verify SMS delivery + notification logs.

@@ -5,6 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const rootDir = __dirname;
+const adminDir = path.join(rootDir, 'admin');
 const publicDir = path.join(rootDir, 'public');
 const dataDir = path.join(rootDir, 'data');
 const reportsDir = path.join(rootDir, 'reports');
@@ -1076,9 +1077,14 @@ app.get('/api/reports/website-audit', (req, res) => {
 
 app.use('/reports', express.static(reportsDir));
 app.use(express.static(__dirname));
+app.use('/admin', express.static(adminDir));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(adminDir, 'index.html'));
 });
 
 app.get('/:page', (req, res, next) => {
