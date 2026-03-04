@@ -1535,3 +1535,181 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+
+/* Homepage hero/nav typography tuned to the provided reference */
+.home-page .nav-shell {
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2.5rem);
+  padding: 1.15rem clamp(1.2rem, 2.8vw, 3.2rem);
+  border-bottom: 1px solid rgba(231, 241, 252, 0.13);
+  background: linear-gradient(180deg, rgba(8, 18, 33, 0.46) 0%, rgba(8, 18, 33, 0.2) 72%, rgba(8, 18, 33, 0.04) 100%);
+  backdrop-filter: blur(5px) saturate(1.04);
+  box-shadow: none;
+}
+
+.home-page.scrolled .site-header .nav-shell {
+  background: linear-gradient(180deg, rgba(8, 18, 33, 0.68) 0%, rgba(8, 18, 33, 0.52) 100%);
+  border-bottom-color: rgba(233, 243, 255, 0.19);
+  box-shadow: 0 10px 26px rgba(4, 11, 24, 0.28);
+}
+
+.home-page .brand {
+  gap: 0.1rem;
+}
+
+.home-page .brand-dot {
+  display: none;
+}
+
+.home-page .brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 2.95vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: #f8fbff;
+}
+
+.home-page .brand-reg {
+  font-size: 0.8rem;
+  font-weight: 600;
+  transform: translateY(-0.75rem);
+  color: rgba(248, 251, 255, 0.92);
+}
+
+.home-page .nav-links {
+  gap: clamp(1.5rem, 3.4vw, 4rem);
+}
+
+.home-page .nav-links a {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 1.08vw, 1.18rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(243, 248, 255, 0.98);
+  padding: 0.18rem 0;
+}
+
+.home-page .nav-links a::after {
+  display: none;
+}
+
+.home-page .nav-links a:hover {
+  transform: none;
+  opacity: 0.88;
+}
+
+.home-page .hero-video {
+  filter: saturate(0.82) contrast(1) brightness(0.57);
+  transform: scale(1.03);
+}
+
+.home-page .hero-overlay {
+  background:
+    linear-gradient(98deg, rgba(3, 12, 22, 0.74) 0%, rgba(3, 12, 22, 0.56) 40%, rgba(3, 12, 22, 0.24) 74%, rgba(3, 12, 22, 0.08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 15, 0.28) 0%, rgba(2, 8, 15, 0.42) 100%);
+}
+
+.home-page .hero-cinema-content {
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding:
+    clamp(6rem, 13vh, 9.5rem)
+    clamp(1.1rem, 3.1vw, 3rem)
+    clamp(7rem, 16vh, 10.5rem)
+    clamp(1.2rem, 9.5vw, 10.2rem);
+}
+
+.home-page .hero-copy {
+  max-width: min(860px, 58vw);
+}
+
+.home-page .eyebrow {
+  display: none;
+}
+
+.home-page .hero-cinema-content h1 {
+  max-width: 13ch;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.45rem, 3.35vw, 4.15rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-shadow: 0 10px 35px rgba(0, 0, 0, 0.42);
+}
+
+.home-page .hero-copy p {
+  margin-top: 0.78rem;
+  max-width: 28ch;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.48rem, 1.62vw, 1.95rem);
+  line-height: 1.26;
+  font-weight: 500;
+  color: rgba(244, 250, 255, 0.95);
+}
+
+.home-page .hero-badges {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .home-page .nav-shell {
+    padding: 0.84rem 1rem 0.7rem;
+  }
+
+  .home-page .brand-name {
+    font-size: clamp(1.52rem, 5.2vw, 2rem);
+  }
+
+  .home-page .brand-reg {
+    transform: translateY(-6px);
+  }
+
+  .home-page .nav-links a {
+    font-size: 0.94rem;
+  }
+
+  .home-page .hero-cinema-content {
+    gap: 0.74rem;
+    padding:
+      clamp(5rem, 10.8vh, 6.6rem)
+      1rem
+      clamp(3.2rem, 9.8vh, 5rem)
+      1rem;
+  }
+
+  .home-page .hero-copy {
+    max-width: 92vw;
+  }
+
+  .home-page .hero-cinema-content h1 {
+    max-width: 14ch;
+    font-size: clamp(2.05rem, 7.1vw, 3.35rem);
+  }
+
+  .home-page .hero-copy p {
+    max-width: 33ch;
+    font-size: clamp(1.06rem, 3.2vw, 1.46rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .home-page .hero-cinema-content {
+    padding:
+      clamp(4.9rem, 10vh, 6rem)
+      1rem
+      clamp(2.7rem, 10.5vh, 4.8rem)
+      1rem;
+  }
+
+  .home-page .hero-cinema-content h1 {
+    font-size: clamp(1.85rem, 8.5vw, 2.8rem);
+    line-height: 1.12;
+  }
+
+  .home-page .hero-copy p {
+    font-size: clamp(0.98rem, 4.2vw, 1.22rem);
+    line-height: 1.32;
+  }
+}
