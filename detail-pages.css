@@ -21,8 +21,10 @@
 html,
 body {
   margin: 0;
+  width: 100%;
   min-height: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -72,8 +74,14 @@ a {
   color: inherit;
 }
 
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 .shell {
-  width: min(1160px, 92vw);
+  width: min(1240px, 95vw);
   margin: 0 auto;
 }
 
@@ -174,7 +182,7 @@ body.scrolled .topbar {
   --hero-image: url('/images/freshwater/photos/rohu.jpg');
   margin-top: 0.85rem;
   border-radius: 28px;
-  min-height: clamp(280px, 50vh, 440px);
+  min-height: clamp(340px, 72vh, 620px);
   padding: clamp(2rem, 5vh, 3.4rem) 1.6rem;
   background:
     linear-gradient(118deg, rgba(0, 0, 0, 0.62), rgba(0, 45, 120, 0.54) 58%, rgba(0, 102, 209, 0.34)),
@@ -185,13 +193,19 @@ body.scrolled .topbar {
   box-shadow: var(--shadow-lg);
 }
 
+@supports (height: 100dvh) {
+  .hero {
+    min-height: clamp(340px, 72dvh, 620px);
+  }
+}
+
 .hero-ecosystem { --hero-image: url('/images/freshwater/photos/fingerlings.jpg'); }
 .hero-marketplace { --hero-image: url('/images/freshwater/photos/catla.jpg'); }
 .hero-technology { --hero-image: url('/images/freshwater/photos/silver-carp.jpg'); }
 .hero-community { --hero-image: url('/images/freshwater/photos/koi.jpg'); }
 .hero-contact { --hero-image: url('/images/freshwater/photos/common-carp.jpg'); }
 .hero-shop { --hero-image: url('/images/freshwater/photos/rohu.jpg'); }
-.hero-transport { --hero-image: url('/images/live-transport/lfcs-e-rickshaw-100kg.jpeg'); }
+.hero-transport { --hero-image: url('/images/live-transport/lfcs-tata-yodha-200kg.jpeg'); }
 
 .hero::after {
   content: '';
@@ -281,7 +295,8 @@ body.scrolled .topbar {
 
 .feature img {
   width: 100%;
-  height: 188px;
+  aspect-ratio: 16 / 10;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid #dde8f6;
@@ -301,7 +316,8 @@ body.scrolled .topbar {
 
 .section-banner {
   width: 100%;
-  height: 210px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid #dde8f6;
@@ -413,10 +429,12 @@ body.scrolled .topbar {
 
 .gallery-item img {
   width: 100%;
-  height: 190px;
-  object-fit: cover;
+  aspect-ratio: 16 / 10;
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
   border: 1px solid #dbe7f8;
+  background: #f6fbff;
 }
 
 .gallery-item figcaption {
@@ -604,7 +622,7 @@ select:focus {
 
 @media (max-width: 680px) {
   .hero {
-    min-height: 260px;
+    min-height: 72vh;
     padding: 1.7rem 1.1rem;
     border-radius: 22px;
   }
@@ -615,7 +633,7 @@ select:focus {
   }
 
   .feature img {
-    height: 170px;
+    aspect-ratio: 16 / 10;
   }
 
   .transport-figure img {
