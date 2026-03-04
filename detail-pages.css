@@ -191,6 +191,7 @@ body.scrolled .topbar {
 .hero-community { --hero-image: url('/images/freshwater/photos/koi.jpg'); }
 .hero-contact { --hero-image: url('/images/freshwater/photos/common-carp.jpg'); }
 .hero-shop { --hero-image: url('/images/freshwater/photos/rohu.jpg'); }
+.hero-transport { --hero-image: url('/images/live-transport/lfcs-e-rickshaw-100kg.jpeg'); }
 
 .hero::after {
   content: '';
@@ -306,6 +307,158 @@ body.scrolled .topbar {
   border: 1px solid #dde8f6;
   background: #ffffff;
   margin-bottom: 0.65rem;
+}
+
+.transport-note {
+  margin-top: 0.62rem;
+  color: #294b82;
+  font-weight: 600;
+}
+
+.transport-layout {
+  align-items: start;
+}
+
+.transport-figure {
+  margin: 0;
+  border: 1px solid #d8e6f7;
+  border-radius: 14px;
+  padding: 0.54rem;
+  background: linear-gradient(168deg, #ffffff, #f2f7ff);
+}
+
+.transport-figure img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #dbe7f8;
+  background: #ffffff;
+  object-fit: contain;
+  max-height: 320px;
+}
+
+.transport-figure figcaption {
+  margin-top: 0.42rem;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+}
+
+.checklist {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.46rem;
+  color: var(--ink-soft);
+}
+
+.checklist li {
+  line-height: 1.45;
+}
+
+.quality-grid {
+  display: grid;
+  gap: 0.72rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quality-card {
+  border: 1px solid #d5e5f7;
+  border-radius: 14px;
+  background: linear-gradient(165deg, #ffffff, #f2f7ff);
+  padding: 0.78rem;
+}
+
+.quality-card h3 {
+  font-size: 0.98rem;
+  margin-bottom: 0.2rem;
+}
+
+.quality-card p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.method-grid {
+  display: grid;
+  gap: 0.78rem;
+}
+
+.method-card {
+  border: 1px solid #d2e2f5;
+  border-radius: 16px;
+  background: linear-gradient(164deg, #ffffff, #eff6ff);
+  padding: 0.8rem;
+}
+
+.method-card h3 {
+  margin-bottom: 0.28rem;
+}
+
+.method-card p {
+  margin: 0 0 0.6rem;
+}
+
+.transport-gallery {
+  display: grid;
+  gap: 0.72rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gallery-item {
+  margin: 0;
+  border: 1px solid #d8e6f7;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 0.5rem;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #dbe7f8;
+}
+
+.gallery-item figcaption {
+  margin-top: 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 0.48rem;
+}
+
+.steps li {
+  position: relative;
+  border: 1px solid #d4e3f6;
+  border-radius: 12px;
+  background: linear-gradient(165deg, #ffffff, #f2f8ff);
+  color: var(--ink-soft);
+  padding: 0.62rem 0.7rem 0.62rem 2.25rem;
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0.64rem;
+  top: 0.56rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  background: linear-gradient(130deg, var(--brand-strong), var(--brand));
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-grid {
@@ -439,6 +592,14 @@ select:focus {
   .grid.cols-2 {
     grid-template-columns: 1fr;
   }
+
+  .quality-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transport-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 680px) {
@@ -455,5 +616,13 @@ select:focus {
 
   .feature img {
     height: 170px;
+  }
+
+  .transport-figure img {
+    max-height: 240px;
+  }
+
+  .transport-gallery {
+    grid-template-columns: 1fr;
   }
 }
