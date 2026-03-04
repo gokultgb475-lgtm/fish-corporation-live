@@ -178,6 +178,44 @@ body.scrolled .topbar {
   flex-wrap: wrap;
 }
 
+.top-actions [data-back-btn] {
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: rgba(238, 246, 255, 0.98);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.44rem 0.66rem;
+  position: relative;
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.top-actions [data-back-btn]::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 0.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, #dbe9ff, #8bb7ff);
+  transform: scaleX(0);
+  transition: transform 180ms ease;
+}
+
+.top-actions [data-back-btn]:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+  background: rgba(146, 182, 255, 0.2);
+  filter: none;
+}
+
+.top-actions [data-back-btn]:hover::after {
+  transform: scaleX(1);
+}
+
 .hero {
   --hero-image: url('/images/freshwater/photos/rohu.jpg');
   margin-top: 0.85rem;
@@ -797,6 +835,31 @@ select:focus {
 
 .home-ui-page .top-actions {
   margin-left: 0.35rem;
+}
+
+.home-ui-page .top-actions [data-back-btn] {
+  border-radius: 0;
+  padding: 0.18rem 0;
+  color: rgba(243, 248, 255, 0.98);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.95rem, 1.02vw, 1.12rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: none;
+}
+
+.home-ui-page .top-actions [data-back-btn]::after {
+  left: 0;
+  right: 0;
+  bottom: -0.24rem;
+  background: linear-gradient(120deg, #f6fbff, #88d8f2);
+}
+
+.home-ui-page .top-actions [data-back-btn]:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+  background: none;
+  filter: none;
 }
 
 .home-ui-page .btn-light {
