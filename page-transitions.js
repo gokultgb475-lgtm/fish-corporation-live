@@ -62,7 +62,14 @@
   function ensureTopNavOnDetailPages() {
     const topbar = document.querySelector('.topbar');
     if (!(topbar instanceof HTMLElement)) return;
-    if (topbar.querySelector('.nav-links')) return;
+    const currentNav = topbar.querySelector('.nav-links');
+    const forceHomeUiNav = document.body.classList.contains('home-ui-page');
+    if (currentNav instanceof HTMLElement) {
+      if (forceHomeUiNav) {
+        currentNav.innerHTML = TOP_NAV_ITEMS.map((item) => `<a href="${item.href}">${item.label}</a>`).join('');
+      }
+      return;
+    }
 
     const nav = buildTopNav();
     const actions = topbar.querySelector('.top-actions');
