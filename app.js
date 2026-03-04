@@ -23,6 +23,7 @@ const cartTotalEl = document.getElementById('cartTotal');
 const cartCountEl = document.getElementById('cartCount');
 const checkoutFormEl = document.getElementById('checkoutForm');
 const checkoutStatusEl = document.getElementById('checkoutStatus');
+const heroVideoEl = document.querySelector('.hero-video');
 
 const state = {
   apiBase: '',
@@ -515,6 +516,81 @@ function setupReveal() {
   nodes.forEach((node) => observer.observe(node));
 }
 
+function setupHeroVideoPlayback() {
+  if (!(heroVideoEl instanceof HTMLVideoElement)) return;
+
+  heroVideoEl.muted = true;
+  heroVideoEl.defaultMuted = true;
+  heroVideoEl.playsInline = true;
+  heroVideoEl.setAttribute('muted', '');
+  heroVideoEl.setAttribute('playsinline', '');
+  heroVideoEl.setAttribute('webkit-playsinline', '');
+
+  let retryTimer = null;
+  let stopped = false;
+
+  const clearRetry = () => {
+    if (retryTimer) {
+      clearInterval(retryTimer);
+      retryTimer = null;
+    }
+  };
+
+  const markReady = () => {
+    heroVideoEl.classList.add('is-ready');
+  };
+
+  const attemptPlay = async () => {
+    if (stopped) return;
+    try {
+      const playPromise = heroVideoEl.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        await playPromise;
+      }
+      markReady();
+      clearRetry();
+    } catch (error) {
+      // Autoplay can be delayed by browser policies, retry below.
+    }
+  };
+
+  heroVideoEl.addEventListener('canplay', () => {
+    markReady();
+    attemptPlay();
+  });
+  heroVideoEl.addEventListener('playing', markReady);
+  heroVideoEl.addEventListener('loadeddata', attemptPlay, { once: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    if (heroVideoEl.paused) attemptPlay();
+  });
+
+  window.addEventListener('pageshow', () => {
+    if (heroVideoEl.paused) attemptPlay();
+  });
+
+  // If browser delays autoplay, try again after ~2 seconds and continue retrying.
+  setTimeout(() => {
+    if (heroVideoEl.paused) attemptPlay();
+  }, 2000);
+
+  retryTimer = setInterval(() => {
+    if (!heroVideoEl.paused) {
+      clearRetry();
+      return;
+    }
+    attemptPlay();
+  }, 2000);
+
+  attemptPlay();
+
+  window.addEventListener('beforeunload', () => {
+    stopped = true;
+    clearRetry();
+  });
+}
+
 function setupEvents() {
   categoryFiltersEl.addEventListener('click', (event) => {
     const target = event.target;
@@ -573,6 +649,7 @@ function setupEvents() {
 
 async function boot() {
   applyImageFallback();
+  setupHeroVideoPlayback();
   setupReveal();
   setupEvents();
   renderCart();

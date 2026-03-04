@@ -278,8 +278,8 @@ body.scrolled .site-header .nav-shell {
 .hero-cinema-content h1 {
   max-width: 15ch;
   color: #f8fdff;
-  font-size: clamp(2.3rem, 5.1vw, 5.35rem);
-  line-height: 1.06;
+  font-size: clamp(2.6rem, 6.2vw, 6.4rem);
+  line-height: 1.02;
   font-weight: 700;
   letter-spacing: 0;
   text-shadow: 0 7px 30px rgba(0, 7, 14, 0.45);
@@ -293,8 +293,8 @@ body.scrolled .site-header .nav-shell {
   max-width: 30ch;
   margin: 0;
   color: rgba(242, 249, 255, 0.94);
-  font-size: clamp(1.05rem, 1.4vw, 1.75rem);
-  line-height: 1.43;
+  font-size: clamp(1.12rem, 1.65vw, 2.02rem);
+  line-height: 1.4;
   text-wrap: pretty;
 }
 
@@ -1090,12 +1090,12 @@ textarea:focus {
 
   .hero-cinema-content h1 {
     max-width: 14.5ch;
-    font-size: clamp(1.92rem, 6.1vw, 3.2rem);
+    font-size: clamp(2.2rem, 6.6vw, 3.9rem);
   }
 
   .hero-copy p {
     max-width: 37ch;
-    font-size: clamp(0.95rem, 2.3vw, 1.16rem);
+    font-size: clamp(1.02rem, 2.55vw, 1.32rem);
   }
 
   .tech-grid,
@@ -1136,13 +1136,13 @@ textarea:focus {
   }
 
   .hero-cinema-content h1 {
-    font-size: clamp(1.45rem, 4.2vw, 2.2rem);
+    font-size: clamp(1.62rem, 4.5vw, 2.55rem);
     max-width: 18ch;
   }
 
   .hero-copy p {
     max-width: 52ch;
-    font-size: 0.86rem;
+    font-size: 0.92rem;
   }
 
   .hero-badges {
@@ -1170,7 +1170,7 @@ textarea:focus {
 
   .hero-cinema-content h1 {
     max-width: 15ch;
-    font-size: clamp(1.74rem, 8vw, 2.7rem);
+    font-size: clamp(1.95rem, 8.6vw, 3.1rem);
   }
 
   .hero-cinema-content {
@@ -1183,7 +1183,7 @@ textarea:focus {
 
   .hero-copy p {
     max-width: 32ch;
-    font-size: 0.98rem;
+    font-size: 1.04rem;
   }
 
   .hero-badges {
