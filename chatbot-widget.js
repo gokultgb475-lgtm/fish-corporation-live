@@ -77,6 +77,10 @@
       border: 1px solid #cae0ed;
       color: #22495f;
     }
+    .bf-chat-msg.typing {
+      opacity: 0.72;
+      font-style: italic;
+    }
     .bf-chat-form {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -173,6 +177,7 @@
   const logEl = panel.querySelector('#bfChatLog');
   const formEl = panel.querySelector('#bfChatForm');
   const inputEl = panel.querySelector('#bfChatInput');
+  const chatHistory = [];
 
   function addMessage(text, who) {
     const item = document.createElement('div');
@@ -180,9 +185,21 @@
     item.textContent = text;
     logEl.appendChild(item);
     logEl.scrollTop = logEl.scrollHeight;
+    return item;
   }
 
-  addMessage('Hello, I can help with order tracking, delivery, partnership, and complaints.', 'bot');
+  function pushHistory(role, content) {
+    const safeContent = String(content || '').trim().slice(0, 350);
+    if (!safeContent) return;
+    chatHistory.push({ role, content: safeContent });
+    if (chatHistory.length > 20) {
+      chatHistory.splice(0, chatHistory.length - 20);
+    }
+  }
+
+  const welcomeText = 'Hello, I can help with order tracking, delivery, partnership, and complaints.';
+  addMessage(welcomeText, 'bot');
+  pushHistory('assistant', welcomeText);
 
   button.addEventListener('click', () => {
     panel.classList.toggle('open');
@@ -201,16 +218,31 @@
     if (!message) return;
 
     addMessage(message, 'user');
+    pushHistory('user', message);
     inputEl.value = '';
+
+    const typingEl = addMessage('Typing...', 'bot typing');
 
     try {
       const payload = await requestApi('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({
+          message,
+          history: chatHistory.slice(-12)
+        })
       });
-      addMessage(payload.reply || 'I could not understand. Please try another question.', 'bot');
+      if (typingEl.parentNode) {
+        typingEl.remove();
+      }
+
+      const botReply = payload.reply || 'I could not understand. Please try another question.';
+      addMessage(botReply, 'bot');
+      pushHistory('assistant', botReply);
     } catch (error) {
+      if (typingEl.parentNode) {
+        typingEl.remove();
+      }
       addMessage(`Chat error: ${error.message}`, 'bot');
     }
   });

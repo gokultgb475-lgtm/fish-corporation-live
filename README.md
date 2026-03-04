@@ -68,6 +68,14 @@ Add Twilio values in `.env`:
 
 If these are missing, orders still work but notification logs show skipped/failed reasons.
 
+## AI Chatbot Setup (Real AI Replies)
+Add these values in `.env`:
+- `OPENAI_API_KEY` (required for real AI responses)
+- `OPENAI_MODEL` (optional, default `gpt-4.1-mini`)
+- `OPENAI_TIMEOUT_MS` (optional, default `12000`)
+
+If `OPENAI_API_KEY` is not set, chatbot will still work in fallback keyword mode.
+
 ### Real-time phone delivery checklist
 1. In Twilio Console, buy/enable an SMS-capable number for your target country.
 2. Put that number in `TWILIO_SMS_FROM` in E.164 format (example: `+1415xxxxxxx`).

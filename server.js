@@ -69,6 +69,16 @@ const DEFAULT_PHONE_COUNTRY_CODE = (
 const ORDER_TRACK_BASE_URL = String(
   process.env.ORDER_TRACK_BASE_URL || `http://localhost:${PORT}/track-order.html`
 ).trim();
+const OPENAI_API_KEY = String(process.env.OPENAI_API_KEY || '').trim();
+const OPENAI_MODEL = String(process.env.OPENAI_MODEL || 'gpt-4.1-mini').trim();
+const OPENAI_TIMEOUT_MS = clamp(Number(process.env.OPENAI_TIMEOUT_MS) || 12000, 4000, 30000);
+const HAS_NATIVE_FETCH = typeof fetch === 'function';
+
+const CHATBOT_SUGGESTIONS = [
+  'How to track my order?',
+  'When do I receive SMS updates?',
+  'How do I join as partner?'
+];
 
 function toSafeText(value, maxLen) {
   return String(value || '')
@@ -159,6 +169,101 @@ function buildAiReply(message) {
   }
 
   return 'I can help with orders, tracking, pricing, partnership, delivery, and complaints. Ask me one specific question.';
+}
+
+function normalizeChatHistory(rawHistory) {
+  if (!Array.isArray(rawHistory)) return [];
+
+  const rows = [];
+  for (const item of rawHistory.slice(-12)) {
+    const role = String(item?.role || '').trim().toLowerCase();
+    const normalizedRole = role === 'assistant' || role === 'bot' ? 'assistant' : role === 'user' ? 'user' : '';
+    if (!normalizedRole) continue;
+
+    const content = toSafeText(item?.content, 350);
+    if (!content) continue;
+
+    rows.push({
+      role: normalizedRole,
+      content
+    });
+  }
+  return rows;
+}
+
+async function buildRealAiReply(message, history) {
+  if (!OPENAI_API_KEY || !HAS_NATIVE_FETCH) {
+    return {
+      reply: buildAiReply(message),
+      source: 'fallback',
+      model: 'rule-based'
+    };
+  }
+
+  const controller = new AbortController();
+  const timeoutRef = setTimeout(() => controller.abort(), OPENAI_TIMEOUT_MS);
+
+  const messages = [
+    {
+      role: 'system',
+      content: [
+        `You are the official customer support AI assistant for ${SITE_NAME}.`,
+        'The company is focused on freshwater fish farming, fish sales, live transport logistics, and partnerships.',
+        'Give practical and accurate customer replies in short paragraphs and clear bullet points if needed.',
+        'Support both English and Tamil transliterated typing.',
+        'Never invent order IDs, payment details, or delivery confirmations.',
+        'For tracking, ask for order ID + checkout phone and direct user to the Track Order page.',
+        'If request is unrelated, politely redirect to orders, tracking, pricing, delivery, partnership, complaints, or contact support.'
+      ].join(' ')
+    },
+    ...normalizeChatHistory(history),
+    {
+      role: 'user',
+      content: message
+    }
+  ];
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        messages,
+        temperature: 0.35,
+        max_tokens: 320
+      }),
+      signal: controller.signal
+    });
+
+    const raw = await response.text();
+    let parsed = {};
+    try {
+      parsed = raw ? JSON.parse(raw) : {};
+    } catch (error) {
+      parsed = {};
+    }
+
+    if (!response.ok) {
+      throw new Error(parsed?.error?.message || `OpenAI HTTP ${response.status}`);
+    }
+
+    const reply = toSafeText(parsed?.choices?.[0]?.message?.content, 1500);
+    if (!reply) {
+      throw new Error('Empty AI response.');
+    }
+
+    return {
+      reply,
+      source: 'openai',
+      model: String(parsed?.model || OPENAI_MODEL)
+    };
+  } finally {
+    clearTimeout(timeoutRef);
+  }
 }
 
 function buildOrderStatusMessage(order, statusLabel) {
@@ -532,6 +637,15 @@ function collectAuditFindings() {
     }
   }
 
+  if (!OPENAI_API_KEY) {
+    findings.push({
+      severity: 'low',
+      code: 'AI_CHAT_FALLBACK_MODE',
+      issue: 'OPENAI_API_KEY is missing, chatbot uses keyword fallback responses.',
+      fix: 'Set OPENAI_API_KEY (and optional OPENAI_MODEL) to enable real AI chat replies.'
+    });
+  }
+
   return {
     generatedAt: new Date().toISOString(),
     findings,
@@ -651,22 +765,31 @@ app.get('/api/site/overview', async (req, res, next) => {
   }
 });
 
-app.post('/api/ai/chat', aiChatLimiter, (req, res) => {
+app.post('/api/ai/chat', aiChatLimiter, async (req, res) => {
   const message = toSafeText(req.body.message, 300);
   if (message.length < 2) {
     return res.status(400).json({ error: 'Please enter a valid question.' });
   }
 
-  const reply = buildAiReply(message);
-  return res.json({
-    ok: true,
-    reply,
-    suggestions: [
-      'How to track my order?',
-      'When do I receive SMS updates?',
-      'How do I join as partner?'
-    ]
-  });
+  try {
+    const aiResult = await buildRealAiReply(message, req.body?.history);
+    return res.json({
+      ok: true,
+      reply: aiResult.reply,
+      source: aiResult.source,
+      model: aiResult.model,
+      suggestions: CHATBOT_SUGGESTIONS
+    });
+  } catch (error) {
+    console.error('AI chat service error:', error?.message || error);
+    return res.json({
+      ok: true,
+      reply: buildAiReply(message),
+      source: 'fallback',
+      model: 'rule-based',
+      suggestions: CHATBOT_SUGGESTIONS
+    });
+  }
 });
 
 app.get('/api/shop/products', async (req, res, next) => {
