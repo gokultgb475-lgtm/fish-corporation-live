@@ -36,7 +36,7 @@
   </header>
 
   <section class="hero-cinema reveal" aria-label="Freshwater fish hero section with video">
-    <video class="hero-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto">
+    <video class="hero-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="/images/freshwater/photos/rohu.jpg">
       <source src="/videos/home-freshwater-custom.mp4" type="video/mp4" />
       <source src="/videos/hero-freshwater-fish.mp4" type="video/mp4" />
     </video>
@@ -106,7 +106,11 @@
               <th>Freshness</th>
             </tr>
           </thead>
-          <tbody id="liveRows"></tbody>
+          <tbody id="liveRows">
+            <tr>
+              <td colspan="7">Loading live data...</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </section>
@@ -133,7 +137,7 @@
       </div>
       <div class="ecosystem-grid">
         <article class="ecosystem-card">
-          <img src="/images/freshwater/photos/fingerlings.jpg" alt="Aquaculture system development" loading="lazy" />
+          <img src="/images/freshwater/photos/common-carp.jpg" alt="Aquaculture system development" loading="lazy" />
           <h3>Development Of Aquaculture System</h3>
           <p>Planning and deployment from hatchery setup to farm digitization and market linkage.</p>
         </article>
@@ -158,7 +162,7 @@
           <p>Field-tested disease treatment and water-health support for safer harvest cycles.</p>
         </article>
         <article class="ecosystem-card">
-          <img src="/images/live-transport/workflow/tile-2.jpg" alt="Live fish export truck system" loading="lazy" />
+          <img src="/images/live-transport/workflow/tile-1.jpg" alt="Live fish export truck system" loading="lazy" />
           <h3>Live Fish Transportation System</h3>
           <p>Oxygen-managed, low-stress long-route transport for healthy arrivals.</p>
         </article>

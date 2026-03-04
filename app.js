@@ -24,6 +24,9 @@ const cartCountEl = document.getElementById('cartCount');
 const checkoutFormEl = document.getElementById('checkoutForm');
 const checkoutStatusEl = document.getElementById('checkoutStatus');
 const heroVideoEl = document.querySelector('.hero-video');
+const heroSectionEl = document.querySelector('.hero-cinema');
+
+const API_REQUEST_TIMEOUT_MS = 9000;
 
 const state = {
   apiBase: '',
@@ -52,7 +55,11 @@ function loadCartFromStorage() {
 }
 
 function persistCart() {
-  localStorage.setItem('bestfishi_cart', JSON.stringify(state.cart));
+  try {
+    localStorage.setItem('bestfishi_cart', JSON.stringify(state.cart));
+  } catch (error) {
+    // Ignore storage write failures (private mode/quota) and keep cart in-memory.
+  }
 }
 
 function formatMoney(value) {
@@ -113,31 +120,46 @@ async function parseJsonSafe(response) {
   }
 }
 
+async function fetchWithTimeout(url, options = {}) {
+  const controller = new AbortController();
+  const timeoutRef = setTimeout(() => controller.abort(), API_REQUEST_TIMEOUT_MS);
+  try {
+    const signal = options.signal || controller.signal;
+    return await fetch(url, { ...options, signal });
+  } finally {
+    clearTimeout(timeoutRef);
+  }
+}
+
 async function requestApi(path, options = {}) {
   const errors = [];
 
   for (const base of apiCandidates) {
     try {
-      const response = await fetch(toApiUrl(base, path), options);
+      const response = await fetchWithTimeout(toApiUrl(base, path), options);
       const payload = await parseJsonSafe(response);
       if (!response.ok) {
-        errors.push(payload?.error || `HTTP ${response.status}`);
+        const message = payload?.error || `HTTP ${response.status}`;
+        errors.push(String(message));
         continue;
       }
       state.apiBase = base;
       return payload;
     } catch (error) {
-      errors.push(error?.message || 'Network error');
+      const message = error?.name === 'AbortError'
+        ? `Request timeout after ${Math.round(API_REQUEST_TIMEOUT_MS / 1000)}s`
+        : (error?.message || 'Network error');
+      errors.push(String(message));
     }
   }
 
   const tail = errors[errors.length - 1] || 'Network error';
-  throw new Error(`Unable to reach backend. Run 'npm run start'. Last error: ${tail}`);
+  throw new Error(`Unable to load data right now. ${tail}`);
 }
 
 function setCartVisibility(visible) {
-  cartDrawerEl.hidden = !visible;
-  cartBackdropEl.hidden = !visible;
+  if (cartDrawerEl) cartDrawerEl.hidden = !visible;
+  if (cartBackdropEl) cartBackdropEl.hidden = !visible;
 }
 
 function getCartCount() {
@@ -151,8 +173,12 @@ function getCartTotal() {
 }
 
 function renderCart() {
+  if (cartCountEl) {
+    cartCountEl.textContent = String(getCartCount());
+  }
+  if (!cartItemsEl || !cartTotalEl) return;
+
   const items = Object.values(state.cart);
-  cartCountEl.textContent = String(getCartCount());
 
   if (!items.length) {
     cartItemsEl.innerHTML = '<p class="muted">Cart is empty. Add products from marketplace.</p>';
@@ -212,6 +238,7 @@ function addToCart(product) {
 }
 
 function renderCategoryFilters() {
+  if (!categoryFiltersEl) return;
   const categories = ['All', ...new Set(state.products.map((item) => item.category).filter(Boolean))];
   categoryFiltersEl.innerHTML = categories.map((category) => {
     const cls = category === state.activeCategory ? 'filter-btn active' : 'filter-btn';
@@ -220,6 +247,7 @@ function renderCategoryFilters() {
 }
 
 function renderProducts() {
+  if (!productGridEl) return;
   const filtered = state.activeCategory === 'All'
     ? state.products
     : state.products.filter((item) => item.category === state.activeCategory);
@@ -254,9 +282,10 @@ function renderProducts() {
   });
 }
 
-function renderLiveRows(rows) {
+function renderLiveRows(rows, emptyMessage = 'No live records available.') {
+  if (!liveRowsEl) return;
   if (!Array.isArray(rows) || !rows.length) {
-    liveRowsEl.innerHTML = '<tr><td colspan="7">No live records available.</td></tr>';
+    liveRowsEl.innerHTML = `<tr><td colspan="7">${emptyMessage}</td></tr>`;
     return;
   }
 
@@ -278,6 +307,7 @@ function renderLiveRows(rows) {
 }
 
 function renderPosts(posts) {
+  if (!postGridEl) return;
   if (!Array.isArray(posts) || !posts.length) {
     postGridEl.innerHTML = '<p class="muted">No community posts available.</p>';
     return;
@@ -295,6 +325,7 @@ function renderPosts(posts) {
 }
 
 function renderTestimonials(testimonials) {
+  if (!testimonialListEl) return;
   if (!Array.isArray(testimonials) || !testimonials.length) {
     testimonialListEl.innerHTML = '<p class="muted">No testimonials available.</p>';
     return;
@@ -339,23 +370,42 @@ function applyImageFallback(scope = document) {
 async function loadOverview() {
   try {
     const data = await requestApi('/api/site/overview', { cache: 'no-store' });
-    heroMissionEl.textContent = data.mission || 'Mission details not available.';
+    if (heroMissionEl) {
+      heroMissionEl.textContent = data.mission || 'Mission details not available.';
+    }
 
     const badges = Array.isArray(data.trustBadges) ? data.trustBadges : [];
-    trustBadgesEl.innerHTML = badges.map((label) => {
-      const href = badgePageMap[label] || '/freshwater-aquaculture.html';
-      return `<a class="badge-pill badge-link" href="${href}">${label}</a>`;
-    }).join('');
+    if (trustBadgesEl) {
+      trustBadgesEl.innerHTML = badges.map((label) => {
+        const href = badgePageMap[label] || '/freshwater-aquaculture.html';
+        return `<a class="badge-pill badge-link" href="${href}">${label}</a>`;
+      }).join('');
+    }
 
     const metrics = Array.isArray(data.metrics) ? data.metrics : [];
-    metricGridEl.innerHTML = metrics.map((item) => `
+    if (metricGridEl) {
+      metricGridEl.innerHTML = metrics.map((item) => `
       <article class="metric-card">
         <strong>${item.value || '--'}</strong>
         <span>${item.label || ''}</span>
       </article>
     `).join('');
+    }
   } catch (error) {
-    heroMissionEl.textContent = error.message;
+    if (heroMissionEl) {
+      heroMissionEl.textContent = 'Mission details are unavailable right now.';
+    }
+    if (trustBadgesEl) {
+      trustBadgesEl.innerHTML = '<span class="badge-pill">Platform data unavailable</span>';
+    }
+    if (metricGridEl) {
+      metricGridEl.innerHTML = `
+        <article class="metric-card">
+          <strong>--</strong>
+          <span>Metrics temporarily unavailable</span>
+        </article>
+      `;
+    }
   }
 }
 
@@ -363,14 +413,25 @@ async function loadLiveBoard() {
   try {
     const data = await requestApi('/api/fish/live', { cache: 'no-store' });
     state.liveGeneratedAt = data.generatedAt;
-    liveSourceEl.textContent = `Source: ${data.source || '--'}`;
-    liveRegionEl.textContent = `Region: ${data.region || '--'}`;
-    liveMetaEl.textContent = `Updated ${formatTime(data.generatedAt)} | Highest: ${data.summary?.highest || '--'} | Lowest: ${data.summary?.lowest || '--'}`;
-    livePulseEl.textContent = `Live feed synced at ${formatTime(data.generatedAt)}`;
+    if (liveSourceEl) liveSourceEl.textContent = `Source: ${data.source || '--'}`;
+    if (liveRegionEl) liveRegionEl.textContent = `Region: ${data.region || '--'}`;
+    if (liveMetaEl) {
+      liveMetaEl.textContent = `Updated ${formatTime(data.generatedAt)} | Highest: ${data.summary?.highest || '--'} | Lowest: ${data.summary?.lowest || '--'}`;
+    }
+    if (livePulseEl) {
+      livePulseEl.textContent = `Live feed synced at ${formatTime(data.generatedAt)}`;
+    }
     renderLiveRows(data.rows || []);
   } catch (error) {
-    liveMetaEl.textContent = `Live rate error: ${error.message}`;
-    livePulseEl.textContent = 'Live sync interrupted. Retrying...';
+    if (liveSourceEl) liveSourceEl.textContent = 'Source: unavailable';
+    if (liveRegionEl) liveRegionEl.textContent = 'Region: unavailable';
+    if (liveMetaEl) {
+      liveMetaEl.textContent = 'Live rates are unavailable right now. Please retry shortly.';
+    }
+    if (livePulseEl) {
+      livePulseEl.textContent = 'Live sync unavailable.';
+    }
+    renderLiveRows([], 'No data available right now.');
   }
 }
 
@@ -381,7 +442,12 @@ async function loadProducts() {
     renderCategoryFilters();
     renderProducts();
   } catch (error) {
-    productGridEl.innerHTML = `<p class="muted">${error.message}</p>`;
+    if (categoryFiltersEl) {
+      categoryFiltersEl.innerHTML = '<span class="muted">Categories unavailable.</span>';
+    }
+    if (productGridEl) {
+      productGridEl.innerHTML = '<p class="muted">Products are unavailable right now.</p>';
+    }
   }
 }
 
@@ -394,14 +460,19 @@ async function loadCommunity() {
     renderPosts(postsData.posts || []);
     renderTestimonials(testimonialData.testimonials || []);
   } catch (error) {
-    postGridEl.innerHTML = `<p class="muted">${error.message}</p>`;
-    testimonialListEl.innerHTML = `<p class="muted">${error.message}</p>`;
+    if (postGridEl) {
+      postGridEl.innerHTML = '<p class="muted">Community feed is unavailable right now.</p>';
+    }
+    if (testimonialListEl) {
+      testimonialListEl.innerHTML = '<p class="muted">Testimonials are unavailable right now.</p>';
+    }
   }
 }
 
 async function submitSalesForm(event) {
   event.preventDefault();
-  salesStatusEl.textContent = 'Submitting inquiry...';
+  if (!(salesFormEl instanceof HTMLFormElement)) return;
+  if (salesStatusEl) salesStatusEl.textContent = 'Submitting inquiry...';
 
   const formData = new FormData(salesFormEl);
   const body = {
@@ -418,16 +489,17 @@ async function submitSalesForm(event) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    salesStatusEl.textContent = payload.message || 'Inquiry submitted successfully.';
-    salesFormEl.reset();
+    if (salesStatusEl) salesStatusEl.textContent = payload.message || 'Inquiry submitted successfully.';
+    if (salesFormEl) salesFormEl.reset();
   } catch (error) {
-    salesStatusEl.textContent = `Error: ${error.message}`;
+    if (salesStatusEl) salesStatusEl.textContent = `Error: ${error.message}`;
   }
 }
 
 async function submitComplaint(event) {
   event.preventDefault();
-  complaintStatusEl.textContent = 'Submitting complaint...';
+  if (!(complaintFormEl instanceof HTMLFormElement)) return;
+  if (complaintStatusEl) complaintStatusEl.textContent = 'Submitting complaint...';
 
   const formData = new FormData(complaintFormEl);
   const body = {
@@ -444,15 +516,16 @@ async function submitComplaint(event) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    complaintStatusEl.textContent = `${payload.message} Ticket: ${payload.complaintId}`;
-    complaintFormEl.reset();
+    if (complaintStatusEl) complaintStatusEl.textContent = `${payload.message} Ticket: ${payload.complaintId}`;
+    if (complaintFormEl) complaintFormEl.reset();
   } catch (error) {
-    complaintStatusEl.textContent = `Error: ${error.message}`;
+    if (complaintStatusEl) complaintStatusEl.textContent = `Error: ${error.message}`;
   }
 }
 
 async function submitCheckout(event) {
   event.preventDefault();
+  if (!(checkoutFormEl instanceof HTMLFormElement)) return;
 
   const items = Object.values(state.cart).map((item) => ({
     id: item.id,
@@ -460,11 +533,11 @@ async function submitCheckout(event) {
   }));
 
   if (!items.length) {
-    checkoutStatusEl.textContent = 'Your cart is empty.';
+    if (checkoutStatusEl) checkoutStatusEl.textContent = 'Your cart is empty.';
     return;
   }
 
-  checkoutStatusEl.textContent = 'Placing order...';
+  if (checkoutStatusEl) checkoutStatusEl.textContent = 'Placing order...';
   const formData = new FormData(checkoutFormEl);
   const body = {
     customerName: String(formData.get('customerName') || '').trim(),
@@ -485,13 +558,15 @@ async function submitCheckout(event) {
     const notifySummary = Array.isArray(payload.notification)
       ? payload.notification.map((item) => formatNotificationStatus(item)).join(' | ')
       : 'Notification status unavailable';
-    checkoutStatusEl.textContent = `${payload.message} Order: ${payload.orderId} | Total: ${formatMoney(payload.grandTotal)} | ${notifySummary}`;
-    checkoutFormEl.reset();
+    if (checkoutStatusEl) {
+      checkoutStatusEl.textContent = `${payload.message} Order: ${payload.orderId} | Total: ${formatMoney(payload.grandTotal)} | ${notifySummary}`;
+    }
+    if (checkoutFormEl) checkoutFormEl.reset();
     state.cart = {};
     persistCart();
     renderCart();
   } catch (error) {
-    checkoutStatusEl.textContent = `Error: ${error.message}`;
+    if (checkoutStatusEl) checkoutStatusEl.textContent = `Error: ${error.message}`;
   }
 }
 
@@ -519,6 +594,20 @@ function setupReveal() {
 function setupHeroVideoPlayback() {
   if (!(heroVideoEl instanceof HTMLVideoElement)) return;
 
+  const enableVideoFallback = () => {
+    if (heroSectionEl) {
+      heroSectionEl.classList.add('hero-video-fallback');
+    }
+    heroVideoEl.classList.remove('is-ready');
+  };
+
+  const disableVideoFallback = () => {
+    if (heroSectionEl) {
+      heroSectionEl.classList.remove('hero-video-fallback');
+    }
+    heroVideoEl.classList.add('is-ready');
+  };
+
   heroVideoEl.muted = true;
   heroVideoEl.defaultMuted = true;
   heroVideoEl.playsInline = true;
@@ -536,10 +625,6 @@ function setupHeroVideoPlayback() {
     }
   };
 
-  const markReady = () => {
-    heroVideoEl.classList.add('is-ready');
-  };
-
   const attemptPlay = async () => {
     if (stopped) return;
     try {
@@ -547,7 +632,7 @@ function setupHeroVideoPlayback() {
       if (playPromise && typeof playPromise.catch === 'function') {
         await playPromise;
       }
-      markReady();
+      disableVideoFallback();
       clearRetry();
     } catch (error) {
       // Autoplay can be delayed by browser policies, retry below.
@@ -555,11 +640,14 @@ function setupHeroVideoPlayback() {
   };
 
   heroVideoEl.addEventListener('canplay', () => {
-    markReady();
+    disableVideoFallback();
     attemptPlay();
   });
-  heroVideoEl.addEventListener('playing', markReady);
+  heroVideoEl.addEventListener('playing', disableVideoFallback);
   heroVideoEl.addEventListener('loadeddata', attemptPlay, { once: true });
+  heroVideoEl.addEventListener('error', enableVideoFallback);
+  heroVideoEl.addEventListener('stalled', enableVideoFallback);
+  heroVideoEl.addEventListener('abort', enableVideoFallback);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) return;
@@ -583,6 +671,12 @@ function setupHeroVideoPlayback() {
     attemptPlay();
   }, 2000);
 
+  setTimeout(() => {
+    if (heroVideoEl.paused) {
+      enableVideoFallback();
+    }
+  }, 5000);
+
   attemptPlay();
 
   window.addEventListener('beforeunload', () => {
@@ -592,55 +686,73 @@ function setupHeroVideoPlayback() {
 }
 
 function setupEvents() {
-  categoryFiltersEl.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLButtonElement)) return;
-    const category = target.dataset.category;
-    if (!category) return;
-    state.activeCategory = category;
-    renderCategoryFilters();
-    renderProducts();
-  });
+  if (categoryFiltersEl) {
+    categoryFiltersEl.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLButtonElement)) return;
+      const category = target.dataset.category;
+      if (!category) return;
+      state.activeCategory = category;
+      renderCategoryFilters();
+      renderProducts();
+    });
+  }
 
-  productGridEl.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    const button = target.closest('[data-add-cart]');
-    if (!(button instanceof HTMLButtonElement)) return;
-    const id = button.dataset.addCart;
-    const product = state.products.find((item) => item.id === id);
-    if (!product) return;
-    addToCart(product);
-  });
+  if (productGridEl) {
+    productGridEl.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      const button = target.closest('[data-add-cart]');
+      if (!(button instanceof HTMLButtonElement)) return;
+      const id = button.dataset.addCart;
+      const product = state.products.find((item) => item.id === id);
+      if (!product) return;
+      addToCart(product);
+    });
+  }
 
-  cartItemsEl.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    const button = target.closest('[data-cart-remove]');
-    if (!(button instanceof HTMLButtonElement)) return;
-    const id = button.dataset.cartRemove;
-    if (!id) return;
-    removeFromCart(id);
-  });
+  if (cartItemsEl) {
+    cartItemsEl.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      const button = target.closest('[data-cart-remove]');
+      if (!(button instanceof HTMLButtonElement)) return;
+      const id = button.dataset.cartRemove;
+      if (!id) return;
+      removeFromCart(id);
+    });
 
-  cartItemsEl.addEventListener('change', (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLInputElement)) return;
-    const id = target.dataset.cartQty;
-    if (!id) return;
-    updateCartQuantity(id, target.value);
-  });
+    cartItemsEl.addEventListener('change', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement)) return;
+      const id = target.dataset.cartQty;
+      if (!id) return;
+      updateCartQuantity(id, target.value);
+    });
+  }
 
-  openCartBtn.addEventListener('click', () => {
-    if (openCartBtn instanceof HTMLAnchorElement) return;
-    setCartVisibility(true);
-  });
-  closeCartBtn.addEventListener('click', () => setCartVisibility(false));
-  cartBackdropEl.addEventListener('click', () => setCartVisibility(false));
+  if (openCartBtn) {
+    openCartBtn.addEventListener('click', () => {
+      if (openCartBtn instanceof HTMLAnchorElement) return;
+      setCartVisibility(true);
+    });
+  }
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', () => setCartVisibility(false));
+  }
+  if (cartBackdropEl) {
+    cartBackdropEl.addEventListener('click', () => setCartVisibility(false));
+  }
 
-  salesFormEl.addEventListener('submit', submitSalesForm);
-  complaintFormEl.addEventListener('submit', submitComplaint);
-  checkoutFormEl.addEventListener('submit', submitCheckout);
+  if (salesFormEl) {
+    salesFormEl.addEventListener('submit', submitSalesForm);
+  }
+  if (complaintFormEl) {
+    complaintFormEl.addEventListener('submit', submitComplaint);
+  }
+  if (checkoutFormEl) {
+    checkoutFormEl.addEventListener('submit', submitCheckout);
+  }
 
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setCartVisibility(false);
@@ -649,6 +761,7 @@ function setupEvents() {
 
 async function boot() {
   applyImageFallback();
+  renderLiveRows([], 'Loading live data...');
   setupHeroVideoPlayback();
   setupReveal();
   setupEvents();
