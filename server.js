@@ -1071,13 +1071,13 @@ app.get('/api/reports/website-audit', (req, res) => {
 });
 
 app.use('/reports', express.static(reportsDir));
-app.use(express.static(publicDir));
+app.use(express.static(__dirname));
 
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api/')) {
     return res.status(404).json({ error: 'API route not found.' });
   }
-  return res.sendFile(path.join(publicDir, 'index.html'));
+  return res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.use((err, req, res, next) => {
