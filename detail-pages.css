@@ -205,7 +205,7 @@ body.scrolled .topbar {
 .hero-community { --hero-image: url('/images/freshwater/photos/koi.jpg'); }
 .hero-contact { --hero-image: url('/images/freshwater/photos/common-carp.jpg'); }
 .hero-shop { --hero-image: url('/images/freshwater/photos/rohu.jpg'); }
-.hero-transport { --hero-image: url('/images/live-transport/lfcs-tata-yodha-200kg.jpeg'); }
+.hero-transport { --hero-image: url('/images/live-transport/workflow/tile-2.jpg'); }
 
 .hero::after {
   content: '';
@@ -329,6 +329,39 @@ body.scrolled .topbar {
   margin-top: 0.62rem;
   color: #294b82;
   font-weight: 600;
+}
+
+.workflow-grid {
+  display: grid;
+  gap: 0.78rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workflow-card {
+  border: 1px solid #d3e3f6;
+  border-radius: 14px;
+  background: linear-gradient(165deg, #ffffff, #eff6ff);
+  padding: 0.55rem;
+}
+
+.workflow-card img {
+  width: 100%;
+  aspect-ratio: 11 / 8;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #dbe8f8;
+  background: #ffffff;
+}
+
+.workflow-card h3 {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.workflow-card p {
+  margin-top: 0.36rem;
+  font-size: 0.88rem;
 }
 
 .transport-layout {
@@ -604,6 +637,21 @@ select:focus {
   .nav-links {
     width: 100%;
     justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    white-space: nowrap;
+    padding-bottom: 0.2rem;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
   }
 
   .grid.cols-3,
@@ -615,8 +663,40 @@ select:focus {
     grid-template-columns: 1fr;
   }
 
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
   .transport-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) and (orientation: landscape) {
+  .topbar {
+    top: 0.35rem;
+    padding: 0.45rem 0.62rem;
+  }
+
+  .hero {
+    min-height: min(100svh, 460px);
+    padding: 1.35rem 1rem;
+  }
+
+  @supports (height: 100dvh) {
+    .hero {
+      min-height: min(100dvh, 460px);
+    }
+  }
+
+  .hero h1 {
+    font-size: clamp(1.46rem, 4.1vw, 2.2rem);
+    max-width: 18ch;
+  }
+
+  .hero p {
+    max-width: 72ch;
+    font-size: 0.9rem;
   }
 }
 
