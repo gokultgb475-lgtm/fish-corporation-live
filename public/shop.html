@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <title>Shop Freshwater Fish | Bestfishi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/detail-pages.css" />
+</head>
+<body>
+  <header class="shell topbar reveal">
+    <a class="brand" href="/"><img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo"  /><span class="brand-name">Bestfishi</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/ecosystem.html">Ecosystem</a>
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/technology.html">Technology</a>
+      <a href="/community.html">Community</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/track-order.html">Track</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <section class="shell hero hero-shop reveal">
+    <h1>Shop Freshwater Fish</h1>
+    <p>Select quantities and place your order. Your order status will be sent to your phone on SMS/WhatsApp based on your preference.</p>
+  </section>
+
+  <main class="shell stack">
+    <section class="card reveal">
+      <h2>Freshwater Catalog</h2>
+      <p class="muted">All products on this page are freshwater fish or freshwater aquaculture inputs.</p>
+      <div id="shopGrid" class="grid cols-3"></div>
+    </section>
+
+    <section class="card reveal">
+      <h2>Selected Items</h2>
+      <div id="selectedItems" class="grid"></div>
+      <p id="selectedTotal" class="muted">Total: Rs.0.00</p>
+    </section>
+
+    <section class="card reveal">
+      <h2>Checkout</h2>
+      <form id="shopOrderForm" class="form-grid" novalidate>
+        <input type="text" name="customerName" placeholder="Customer name" required minlength="2" />
+        <input type="text" name="phone" placeholder="Phone number" required minlength="8" />
+        <input type="email" name="email" placeholder="Email (optional)" />
+        <select name="notifyPreference">
+          <option value="both">Notify me on SMS + WhatsApp</option>
+          <option value="sms">Notify me on SMS only</option>
+          <option value="whatsapp">Notify me on WhatsApp only</option>
+          <option value="none">No notifications</option>
+        </select>
+        <p class="muted">Order confirmed status always sends an SMS to your mobile number.</p>
+        <textarea name="address" placeholder="Delivery address" required minlength="10"></textarea>
+        <textarea name="notes" placeholder="Notes (optional)"></textarea>
+        <button class="btn btn-primary" type="submit">Place Freshwater Order</button>
+      </form>
+      <p id="orderStatus" class="status"></p>
+    </section>
+  </main>
+
+  <script src="/simple-page.js"></script>
+  <script src="/shop.js"></script>
+  <script src="/chatbot-widget.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

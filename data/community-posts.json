@@ -1,0 +1,26 @@
+[
+  {
+    "id": "post-001",
+    "title": "Reducing Mortality In Live Fish Transport",
+    "summary": "A practical checklist for oxygen balance, water quality, and transit stress reduction.",
+    "tag": "Logistics",
+    "publishedAt": "2026-02-14",
+    "image": "/images/freshwater/photos/common-carp.jpg"
+  },
+  {
+    "id": "post-002",
+    "title": "Aquaculture Feed Planning For Growth Stability",
+    "summary": "How feed scheduling and pond monitoring improve growth consistency and cost control.",
+    "tag": "Feed",
+    "publishedAt": "2026-02-23",
+    "image": "/images/freshwater/photos/feed.jpg"
+  },
+  {
+    "id": "post-003",
+    "title": "Freshwater Farming Playbook For New Farmers",
+    "summary": "Seed selection, stocking density, and disease prevention basics for first-cycle success.",
+    "tag": "Freshwater",
+    "publishedAt": "2026-03-01",
+    "image": "/images/freshwater/photos/rohu.jpg"
+  }
+]

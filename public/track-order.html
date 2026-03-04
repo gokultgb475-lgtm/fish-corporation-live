@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <title>Track Order | Bestfishi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/detail-pages.css" />
+</head>
+<body>
+  <header class="shell topbar reveal">
+    <a class="brand" href="/"><img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo"  /><span class="brand-name">Bestfishi</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/ecosystem.html">Ecosystem</a>
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/technology.html">Technology</a>
+      <a href="/community.html">Community</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/track-order.html">Track</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <section class="shell hero reveal">
+    <h1>Track Your Freshwater Order</h1>
+    <p>Enter order ID and phone number to see the current situation of your order.</p>
+  </section>
+
+  <main class="shell stack">
+    <section class="card reveal">
+      <h2>Order Tracking</h2>
+      <form id="trackForm" class="form-grid" novalidate>
+        <input type="text" name="orderId" placeholder="Order ID (example: BF-12345678)" required />
+        <input type="text" name="phone" placeholder="Phone number used for order" required minlength="8" />
+        <button class="btn btn-primary" type="submit">Check Status</button>
+      </form>
+      <p id="trackStatus" class="status"></p>
+      <div id="trackResult" class="grid"></div>
+    </section>
+  </main>
+
+  <script src="/simple-page.js"></script>
+  <script src="/track-order.js"></script>
+  <script src="/chatbot-widget.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

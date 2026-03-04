@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <title>Contact | Bestfishi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/detail-pages.css" />
+</head>
+<body>
+  <header class="shell topbar reveal">
+    <a class="brand" href="/"><img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo" /><span class="brand-name">Bestfishi</span></a>
+    <div class="top-actions">
+      <button class="btn btn-light" type="button" data-back-btn>Back</button>
+    </div>
+  </header>
+
+  <section class="shell hero hero-contact reveal">
+    <h1>Contact</h1>
+    <p>Reach Bestfishi for sales partnerships, operations planning, and issue resolution.</p>
+  </section>
+
+  <main class="shell stack">
+    <section class="card reveal">
+      <h2>Sales Inquiry</h2>
+      <img class="section-banner" src="/images/freshwater/photos/fingerlings.jpg" alt="Freshwater farm partnership and sales planning" loading="lazy" />
+      <form id="salesForm" class="form-grid" novalidate>
+        <input type="text" name="name" placeholder="Your name" required minlength="2" />
+        <input type="text" name="phone" placeholder="Phone number" required minlength="8" />
+        <input type="email" name="email" placeholder="Email (optional)" />
+        <input type="text" name="company" placeholder="Company / Farm name" />
+        <textarea name="message" placeholder="Tell us your requirement" required minlength="12"></textarea>
+        <button class="btn btn-primary" type="submit">Submit Sales Inquiry</button>
+      </form>
+      <p id="salesStatus" class="status"></p>
+    </section>
+
+    <section class="card reveal">
+      <h2>Complaint Desk</h2>
+      <img class="section-banner" src="/images/freshwater/photos/common-carp.jpg" alt="Freshwater support and complaint resolution desk" loading="lazy" />
+      <form id="complaintForm" class="form-grid" novalidate>
+        <input type="text" name="name" placeholder="Full name" required minlength="2" />
+        <input type="text" name="contact" placeholder="Phone or email" required minlength="8" />
+        <input type="text" name="orderId" placeholder="Order ID (optional)" />
+        <select name="category">
+          <option value="Delivery">Delivery</option>
+          <option value="Quality">Quality</option>
+          <option value="Billing">Billing</option>
+          <option value="Other">Other</option>
+        </select>
+        <textarea name="message" placeholder="Describe your issue" required minlength="10"></textarea>
+        <button class="btn btn-primary" type="submit">Submit Complaint</button>
+      </form>
+      <p id="complaintStatus" class="status"></p>
+    </section>
+  </main>
+
+  <script src="/simple-page.js"></script>
+  <script src="/contact-page.js"></script>
+  <script src="/chatbot-widget.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

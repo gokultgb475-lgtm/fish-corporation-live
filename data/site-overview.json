@@ -1,0 +1,21 @@
+{
+  "brand": "Bestfishi Freshwater Aquaculture Platform",
+  "mission": "Enable sustainable freshwater aquaculture and transparent fish supply chain operations across India.",
+  "metrics": [
+    { "label": "States Covered", "value": "11+" },
+    { "label": "Farmers Connected", "value": "8,400+" },
+    { "label": "Freshwater Orders / Month", "value": "3,200+" },
+    { "label": "Avg Delivery Radius", "value": "700-800 km" }
+  ],
+  "trustBadges": [
+    "Freshwater Aquaculture",
+    "Cold-chain Logistics",
+    "Traceability First",
+    "AI + IoT Monitoring"
+  ],
+  "ctas": [
+    "Get Started",
+    "Request Partnership",
+    "Shop Freshwater Fish"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "fish-corporation-live",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live fish corporation website with pricing, complaint handling, and safety protections",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "audit:local": "node scripts/audit-report.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

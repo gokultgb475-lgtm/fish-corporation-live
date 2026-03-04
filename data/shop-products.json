@@ -1,0 +1,142 @@
+[
+  {
+    "id": "prd-rohu-fresh",
+    "name": "Freshwater Rohu",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "3 kg", "10 kg"],
+    "price": 320,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/rohu.jpg",
+    "description": "Farm-monitored freshwater rohu with stable daily supply."
+  },
+  {
+    "id": "prd-catla-fresh",
+    "name": "Catla Bulk Grade",
+    "category": "Freshwater Fish",
+    "weightOptions": ["2 kg", "5 kg", "20 kg"],
+    "price": 360,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/catla.jpg",
+    "description": "Bulk-ready catla for hotels, canteens, and wholesale buyers."
+  },
+  {
+    "id": "prd-tilapia-fresh",
+    "name": "Tilapia Farm Select",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "5 kg"],
+    "price": 295,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/tilapia.jpg",
+    "description": "Healthy freshwater tilapia harvested with controlled farm practices."
+  },
+  {
+    "id": "prd-pangasius-fresh",
+    "name": "Pangasius Value Pack",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "3 kg", "8 kg"],
+    "price": 245,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/pangasius.jpg",
+    "description": "Economical freshwater pangasius for retail and food service."
+  },
+  {
+    "id": "prd-murrel-premium",
+    "name": "Murrel Premium",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "4 kg"],
+    "price": 680,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/murrel.jpg",
+    "description": "High-value murrel sourced from selected freshwater partners."
+  },
+  {
+    "id": "prd-magur-premium",
+    "name": "Magur Live Grade",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "3 kg", "6 kg"],
+    "price": 560,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/magur.jpg",
+    "description": "Freshwater magur for premium live-fish demand."
+  },
+  {
+    "id": "prd-silver-carp",
+    "name": "Silver Carp",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "6 kg"],
+    "price": 230,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/silver-carp.jpg",
+    "description": "Affordable and consistent freshwater silver carp supply."
+  },
+  {
+    "id": "prd-common-carp",
+    "name": "Common Carp",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "7 kg"],
+    "price": 265,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/common-carp.jpg",
+    "description": "High-demand common carp with predictable bulk availability."
+  },
+  {
+    "id": "prd-grass-carp",
+    "name": "Grass Carp",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "3 kg", "8 kg"],
+    "price": 255,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/grass-carp.jpg",
+    "description": "Freshwater grass carp ideal for price-sensitive retail channels."
+  },
+  {
+    "id": "prd-bata-fish",
+    "name": "Bata Fish",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "5 kg"],
+    "price": 275,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/bata.jpg",
+    "description": "Freshwater bata fish sourced from monitored inland farms."
+  },
+  {
+    "id": "prd-koi-fish",
+    "name": "Koi Fish",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "4 kg"],
+    "price": 420,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/koi.jpg",
+    "description": "Koi fish lot with quality grading and cold-chain compliance."
+  },
+  {
+    "id": "prd-knife-fish",
+    "name": "Knife Fish",
+    "category": "Freshwater Fish",
+    "weightOptions": ["1 kg", "2 kg", "5 kg"],
+    "price": 470,
+    "unit": "kg",
+    "image": "/images/freshwater/photos/knife-fish.jpg",
+    "description": "Premium freshwater knife fish for specialty demand."
+  },
+  {
+    "id": "prd-seed-fingerlings",
+    "name": "Healthy Fingerlings Pack",
+    "category": "Aquaculture Inputs",
+    "weightOptions": ["100 units", "500 units", "1000 units"],
+    "price": 1200,
+    "unit": "pack",
+    "image": "/images/freshwater/photos/fingerlings.jpg",
+    "description": "Disease-screened freshwater seed and fingerlings for pond stocking."
+  },
+  {
+    "id": "prd-feed-grow",
+    "name": "Freshwater Growth Feed",
+    "category": "Aquaculture Inputs",
+    "weightOptions": ["25 kg", "50 kg"],
+    "price": 1850,
+    "unit": "bag",
+    "image": "/images/freshwater/photos/feed.jpg",
+    "description": "Balanced feed formula designed for freshwater growth cycles."
+  }
+]

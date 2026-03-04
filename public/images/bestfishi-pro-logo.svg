@@ -1,0 +1,14 @@
+<svg width="220" height="54" viewBox="0 0 220 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="54" height="54" rx="14" fill="url(#grad)"/>
+  <path d="M15 30C15 22.8203 20.8203 17 28 17C33.3247 17 37.8758 20.2018 39.8844 24.7862C34.6942 25.4048 31.5 28.8309 31.5 33C31.5 37.1421 34.6528 40.5509 39.8007 41.196C37.7778 45.7477 33.2472 49 28 49C20.8203 49 15 43.1797 15 36V30Z" fill="white"/>
+  <circle cx="36.5" cy="33" r="2.4" fill="#0B4E86"/>
+  <path d="M51 24C48.5 27 45.7 29 41.5 29" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="66" y="24" fill="#0C2B43" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="800">Bestfishi</text>
+  <text x="66" y="42" fill="#3A627D" font-family="Manrope, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="0.7">Aquaculture Intelligence</text>
+  <defs>
+    <linearGradient id="grad" x1="7" y1="4" x2="52" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A8A8"/>
+      <stop offset="1" stop-color="#005F90"/>
+    </linearGradient>
+  </defs>
+</svg>

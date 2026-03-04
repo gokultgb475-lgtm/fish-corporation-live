@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bestfishi Freshwater Platform | Aquaculture Ecosystem</title>
+  <meta name="description" content="A real-world freshwater aquaculture website with live pricing, marketplace, technology, farmer network, and logistics." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Bestfishi home">
+        <img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo" />
+        <span class="brand-name">Bestfishi</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/ecosystem.html">Ecosystem</a>
+        <a href="/marketplace.html">Marketplace</a>
+        <a href="/technology.html">Technology</a>
+        <a href="/community.html">Community</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/track-order.html">Track Order</a>
+        <a href="/admin.html">Admin</a>
+      </nav>
+      <button id="openCartBtn" class="nav-cart-link" type="button">Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <section class="hero-cinema reveal" aria-label="Freshwater fish hero section with video">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/images/freshwater/photos/rohu.jpg">
+      <source src="/videos/hero-freshwater-fish.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-cinema-content">
+      <p class="eyebrow">Bestfishi Freshwater Platform</p>
+      <h1>Full-stack freshwater aquaculture tech platform.</h1>
+      <p>
+        Using AI and satellite-aided monitoring to bring transparency and efficiency to
+        the freshwater value chain from farm to market.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/shop.html">Shop Freshwater Fish</a>
+        <a class="btn btn-light" href="/partnership.html">Request Partnership</a>
+      </div>
+      <div id="trustBadges" class="hero-badges"></div>
+    </div>
+  </section>
+
+  <section class="shell hero-data reveal">
+    <article class="panel mission-panel">
+      <p class="section-kicker">Operational Mission</p>
+      <h2>Freshwater-first network designed for real buyers and fish farmers</h2>
+      <p id="heroMission" class="muted">Loading mission...</p>
+      <div id="metricGrid" class="metric-grid"></div>
+      <p id="livePulse" class="pulse-note">Syncing live market feed...</p>
+    </article>
+
+    <article class="panel quick-link-panel">
+      <p class="section-kicker">Explore By Capability</p>
+      <h2>Dedicated pages for each core function</h2>
+      <div class="quick-link-grid">
+        <a class="quick-link" href="/freshwater-aquaculture.html">Freshwater Aquaculture</a>
+        <a class="quick-link" href="/cold-chain-logistics.html">Cold-chain Logistics</a>
+        <a class="quick-link" href="/traceability.html">Traceability First</a>
+        <a class="quick-link" href="/ai-iot-monitoring.html">AI + IoT Monitoring</a>
+        <a class="quick-link" href="/marketplace.html">Marketplace</a>
+        <a class="quick-link" href="/community.html">Community</a>
+      </div>
+    </article>
+  </section>
+
+  <main class="shell stack">
+    <section id="live-board" class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Live Price Intelligence</p>
+          <h2>Today's Live Fish Rate Board</h2>
+          <p class="muted" id="liveMeta">Loading live data...</p>
+        </div>
+        <div class="pill-row">
+          <span id="liveSource" class="pill">Source: --</span>
+          <span id="liveRegion" class="pill">Region: --</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fish</th>
+              <th>Grade</th>
+              <th>Origin</th>
+              <th>Stock</th>
+              <th>Live Price</th>
+              <th>Movement</th>
+              <th>Freshness</th>
+            </tr>
+          </thead>
+          <tbody id="liveRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="marketplace" class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Interactive Retail Section</p>
+          <h2>Marketplace</h2>
+          <p class="muted">Freshwater fish catalog with clear pricing, category filters, and direct ordering.</p>
+        </div>
+        <a class="btn btn-light" href="/shop.html">Open Full Shop</a>
+      </div>
+      <div id="categoryFilters" class="filter-row"></div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section id="ecosystem" class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Business Verticals</p>
+          <h2>Aquaculture Development System</h2>
+        </div>
+      </div>
+      <div class="ecosystem-grid">
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/fingerlings.jpg" alt="Aquaculture system development" loading="lazy" />
+          <h3>Development Of Aquaculture System</h3>
+          <p>Planning and deployment from hatchery setup to farm digitization and market linkage.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/magur.jpg" alt="Aqua imports" loading="lazy" />
+          <h3>Aqua Imports</h3>
+          <p>Sourcing for equipment, healthcare products, and specialized aquaculture inputs.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/fingerlings.jpg" alt="Fish seeds" loading="lazy" />
+          <h3>Fish Seeds</h3>
+          <p>Quality fingerlings and seed distribution with stocking guidance for higher survival.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/feed.jpg" alt="Feeding programs" loading="lazy" />
+          <h3>Feeding Programs</h3>
+          <p>Growth-stage feed plans to improve fish health and optimize conversion cost.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/murrel.jpg" alt="Aqua therapeutics" loading="lazy" />
+          <h3>Aqua Therapeutics</h3>
+          <p>Field-tested disease treatment and water-health support for safer harvest cycles.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/common-carp.jpg" alt="Live fish transportation system" loading="lazy" />
+          <h3>Live Fish Transportation System</h3>
+          <p>Oxygen-managed, low-stress long-route transport for healthy arrivals.</p>
+        </article>
+        <article class="ecosystem-card">
+          <img src="/images/freshwater/photos/rohu.jpg" alt="Freshwater fish" loading="lazy" />
+          <h3>Freshwater Fish</h3>
+          <p>Freshwater species-focused farming and retail distribution aligned to local demand.</p>
+        </article>
+        <article class="ecosystem-card highlight">
+          <img src="/images/freshwater/photos/grass-carp.jpg" alt="700 to 800 km coverage" loading="lazy" />
+          <h3>700 to 800 km Coverage</h3>
+          <p>Route-ready supply chain for practical long-distance operations across regions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="technology" class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Technology Stack</p>
+          <h2>IoT, AI, And Analytics For Aquaculture</h2>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/silver-carp.jpg" alt="IoT pond monitoring" loading="lazy" />
+          <h3>IoT Pond Monitoring</h3>
+          <p>Real-time oxygen, temperature, and water-quality signals to reduce farm risk.</p>
+        </article>
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/catla.jpg" alt="AI demand and pricing" loading="lazy" />
+          <h3>AI Demand & Pricing Signals</h3>
+          <p>Market-aware recommendations for stocking, dispatch, and profitable sales windows.</p>
+        </article>
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/tilapia.jpg" alt="Biometric analytics" loading="lazy" />
+          <h3>Biometric Data Analytics</h3>
+          <p>Health and growth trend analysis for better planning at farm and enterprise scale.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="community" class="panel reveal split">
+      <article>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Education</p>
+            <h2>Community & Knowledge</h2>
+          </div>
+        </div>
+        <div id="postGrid" class="post-grid"></div>
+      </article>
+      <article>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Testimonials</p>
+            <h2>Farmer & Buyer Voices</h2>
+          </div>
+        </div>
+        <div id="testimonialList" class="testimonial-list"></div>
+      </article>
+    </section>
+
+    <section id="faq" class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Help Center</p>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>How does delivery work for long distance orders?</summary>
+          <p>We use insulated and oxygen-managed transportation with delivery planning up to a 700-800 km service radius.</p>
+        </details>
+        <details>
+          <summary>Can farmers join as production partners?</summary>
+          <p>Yes. Use the partnership form and our operations team will share onboarding and scheduling steps.</p>
+        </details>
+        <details>
+          <summary>Do you provide seed, feed, and therapeutics together?</summary>
+          <p>Yes, integrated input support is available in selected regions for verified partner farms.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="panel reveal contact-grid">
+      <article>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Contact Sales</p>
+            <h2>Get Started With Freshwater Operations</h2>
+          </div>
+        </div>
+        <form id="salesForm" class="form-grid" novalidate>
+          <input type="text" name="name" placeholder="Your name" required minlength="2" />
+          <input type="text" name="phone" placeholder="Phone number" required minlength="8" />
+          <input type="email" name="email" placeholder="Email (optional)" />
+          <input type="text" name="company" placeholder="Company / Farm name" />
+          <textarea name="message" placeholder="Tell us your requirement" required minlength="12"></textarea>
+          <button class="btn btn-primary" type="submit">Submit Sales Inquiry</button>
+        </form>
+        <p id="salesStatus" class="status-text muted"></p>
+      </article>
+
+      <article>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Complaint Desk</p>
+            <h2>Issue Resolution</h2>
+          </div>
+        </div>
+        <form id="complaintForm" class="form-grid" novalidate>
+          <input type="text" name="name" placeholder="Full name" required minlength="2" />
+          <input type="text" name="contact" placeholder="Phone or email" required minlength="8" />
+          <input type="text" name="orderId" placeholder="Order ID (optional)" />
+          <select name="category">
+            <option value="Delivery">Delivery</option>
+            <option value="Quality">Quality</option>
+            <option value="Billing">Billing</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea name="message" placeholder="Describe your issue" required minlength="10"></textarea>
+          <button class="btn btn-primary" type="submit">Submit Complaint</button>
+        </form>
+        <p id="complaintStatus" class="status-text muted"></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <p>Bestfishi Freshwater Platform | Sustainable aquaculture, transparent trade, and live logistics.</p>
+      <div class="footer-links">
+        <a href="/reports/bestfishi-remodel-changes.md" target="_blank" rel="noopener">Remodel Notes</a>
+      </div>
+    </div>
+  </footer>
+
+  <aside id="cartDrawer" class="cart-drawer" hidden>
+    <div class="cart-head">
+      <h2>Your Cart</h2>
+      <button id="closeCartBtn" class="btn btn-light" type="button">Close</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <p id="cartTotal" class="cart-total">Total: Rs.0</p>
+    <form id="checkoutForm" class="form-grid" novalidate>
+      <input type="text" name="customerName" placeholder="Customer name" required minlength="2" />
+      <input type="text" name="phone" placeholder="Phone number" required minlength="8" />
+      <input type="email" name="email" placeholder="Email (optional)" />
+      <select name="notifyPreference">
+        <option value="both">Notify me on SMS + WhatsApp</option>
+        <option value="sms">Notify me on SMS only</option>
+        <option value="whatsapp">Notify me on WhatsApp only</option>
+        <option value="none">No notifications</option>
+      </select>
+      <p class="muted">Order confirmed status always sends an SMS to your mobile number.</p>
+      <textarea name="address" placeholder="Delivery address" required minlength="10"></textarea>
+      <textarea name="notes" placeholder="Notes (optional)"></textarea>
+      <button class="btn btn-primary" type="submit">Place Order</button>
+    </form>
+    <p id="checkoutStatus" class="status-text muted"></p>
+  </aside>
+
+  <div id="cartBackdrop" class="cart-backdrop" hidden></div>
+
+  <script src="/app.js"></script>
+  <script src="/chatbot-widget.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

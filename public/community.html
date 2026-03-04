@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <title>Community | Bestfishi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/detail-pages.css" />
+</head>
+<body>
+  <header class="shell topbar reveal">
+    <a class="brand" href="/"><img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo" /><span class="brand-name">Bestfishi</span></a>
+    <div class="top-actions">
+      <button class="btn btn-light" type="button" data-back-btn>Back</button>
+    </div>
+  </header>
+
+  <section class="shell hero hero-community reveal">
+    <h1>Community</h1>
+    <p>Knowledge updates, farmer stories, and buyer feedback from freshwater operations.</p>
+  </section>
+
+  <main class="shell stack">
+    <section class="card reveal">
+      <h2>Knowledge Posts</h2>
+      <div id="communityPosts" class="grid cols-2"></div>
+    </section>
+
+    <section class="card reveal">
+      <h2>Testimonials</h2>
+      <div id="communityTestimonials" class="grid cols-2"></div>
+      <p id="communityStatus" class="status"></p>
+    </section>
+  </main>
+
+  <script src="/simple-page.js"></script>
+  <script src="/community-page.js"></script>
+  <script src="/chatbot-widget.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

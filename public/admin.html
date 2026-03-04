@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="shortcut icon" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <title>Bestfishi Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin.css" />
+</head>
+<body>
+  <header class="admin-hero" id="top">
+    <video class="admin-hero-video" autoplay muted loop playsinline preload="metadata" poster="/images/freshwater/photos/silver-carp.jpg">
+      <source src="/videos/admin-freshwater-real.mp4" type="video/mp4" />
+    </video>
+    <div class="admin-hero-overlay"></div>
+
+    <div class="shell admin-topbar reveal">
+      <a class="brand" href="/">
+        <img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo" />
+        <span class="brand-name">Bestfishi</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-light" href="/">Back To Website</a>
+        <button id="refreshBtn" class="btn btn-primary" type="button">Refresh</button>
+      </div>
+    </div>
+
+    <div class="shell admin-hero-content reveal">
+      <div>
+        <p class="kicker">Operations Control Center</p>
+        <h1>Freshwater Admin Dashboard</h1>
+        <p>Manage orders, complaints, and sales inquiries with real-time status updates from one panel.</p>
+      </div>
+      <form id="authForm" class="auth-form">
+        <input id="adminKeyInput" type="password" placeholder="Enter ADMIN_KEY" required />
+        <button class="btn btn-primary" type="submit">Unlock Dashboard</button>
+      </form>
+      <p id="authStatus" class="muted">Provide valid ADMIN_KEY to load dashboard data.</p>
+    </div>
+  </header>
+
+  <main class="shell dashboard-stack">
+    <section class="stats-grid reveal">
+      <article class="stat-card">
+        <span>Orders</span>
+        <strong id="ordersCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Complaints</span>
+        <strong id="complaintsCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Sales Inquiries</span>
+        <strong id="inquiriesCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Last Sync</span>
+        <strong id="lastSync">--</strong>
+      </article>
+    </section>
+
+    <section class="panel reveal">
+      <div class="section-head">
+        <h2>Orders</h2>
+      </div>
+      <div id="ordersList" class="record-list">
+        <p class="muted">No orders loaded.</p>
+      </div>
+    </section>
+
+    <section class="split reveal">
+      <article class="panel">
+        <div class="section-head">
+          <h2>Complaints</h2>
+        </div>
+        <div id="complaintsList" class="record-list">
+          <p class="muted">No complaints loaded.</p>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-head">
+          <h2>Sales Inquiries</h2>
+        </div>
+        <div id="inquiriesList" class="record-list">
+          <p class="muted">No inquiries loaded.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="/admin.js"></script>
+  <script src="/page-transitions.js"></script>
+</body>
+</html>

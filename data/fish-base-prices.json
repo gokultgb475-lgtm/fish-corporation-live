@@ -1,0 +1,14 @@
+[
+  { "id": "rohu", "name": "Rohu", "grade": "A", "basePrice": 320, "unit": "kg", "origin": "Thanjavur", "stock": "High" },
+  { "id": "catla", "name": "Catla", "grade": "A", "basePrice": 360, "unit": "kg", "origin": "Trichy", "stock": "High" },
+  { "id": "tilapia", "name": "Tilapia", "grade": "A", "basePrice": 295, "unit": "kg", "origin": "Namakkal", "stock": "Medium" },
+  { "id": "pangasius", "name": "Pangasius", "grade": "B", "basePrice": 245, "unit": "kg", "origin": "Madurai", "stock": "High" },
+  { "id": "murrel", "name": "Murrel (Viral)", "grade": "Premium", "basePrice": 680, "unit": "kg", "origin": "Erode", "stock": "Low" },
+  { "id": "magur", "name": "Magur", "grade": "A", "basePrice": 560, "unit": "kg", "origin": "Salem", "stock": "Medium" },
+  { "id": "silver-carp", "name": "Silver Carp", "grade": "B", "basePrice": 230, "unit": "kg", "origin": "Karur", "stock": "High" },
+  { "id": "common-carp", "name": "Common Carp", "grade": "A", "basePrice": 265, "unit": "kg", "origin": "Villupuram", "stock": "High" },
+  { "id": "grass-carp", "name": "Grass Carp", "grade": "A", "basePrice": 255, "unit": "kg", "origin": "Dindigul", "stock": "High" },
+  { "id": "bata-fish", "name": "Bata Fish", "grade": "A", "basePrice": 275, "unit": "kg", "origin": "Nagapattinam", "stock": "Medium" },
+  { "id": "koi-fish", "name": "Koi Fish", "grade": "A", "basePrice": 420, "unit": "kg", "origin": "Tenkasi", "stock": "Medium" },
+  { "id": "knife-fish", "name": "Knife Fish", "grade": "Premium", "basePrice": 470, "unit": "kg", "origin": "Cuddalore", "stock": "Low" }
+]
