@@ -25,12 +25,6 @@ const checkoutFormEl = document.getElementById('checkoutForm');
 const checkoutStatusEl = document.getElementById('checkoutStatus');
 const heroVideoEl = document.querySelector('.hero-video');
 const heroSectionEl = document.querySelector('.hero-cinema');
-const opsShowcaseEl = document.getElementById('ops-showcase');
-const opsViewportEl = document.querySelector('[data-ops-viewport]');
-const opsTrackEl = document.querySelector('[data-ops-track]');
-const opsDotsEl = document.querySelector('[data-ops-dots]');
-const opsPrevBtn = document.querySelector('[data-ops-prev]');
-const opsNextBtn = document.querySelector('[data-ops-next]');
 
 const API_REQUEST_TIMEOUT_MS = 9000;
 
@@ -691,153 +685,6 @@ function setupHeroVideoPlayback() {
   });
 }
 
-function setupOperationsShowcaseSlider() {
-  if (!(opsShowcaseEl instanceof HTMLElement)) return;
-  if (!(opsViewportEl instanceof HTMLElement)) return;
-  if (!(opsTrackEl instanceof HTMLElement)) return;
-
-  const slides = Array.from(opsTrackEl.querySelectorAll('.ops-slide'));
-  if (!slides.length) return;
-
-  let currentIndex = 0;
-  let maxIndex = 0;
-  let perView = 1;
-  let autoTimer = null;
-  let isHovered = false;
-  let resizeRaf = null;
-
-  const getPerView = () => {
-    const width = opsViewportEl.clientWidth || window.innerWidth;
-    if (width >= 1400) return 4;
-    if (width >= 980) return 3;
-    if (width >= 680) return 2;
-    return 1;
-  };
-
-  const stopAuto = () => {
-    if (autoTimer) {
-      clearInterval(autoTimer);
-      autoTimer = null;
-    }
-  };
-
-  const renderDots = () => {
-    if (!(opsDotsEl instanceof HTMLElement)) return;
-    const dotCount = maxIndex + 1;
-    opsDotsEl.innerHTML = '';
-    for (let i = 0; i < dotCount; i += 1) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = i === currentIndex ? 'ops-dot active' : 'ops-dot';
-      btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
-      btn.dataset.opsIndex = String(i);
-      opsDotsEl.appendChild(btn);
-    }
-  };
-
-  const syncButtons = () => {
-    const disabled = maxIndex <= 0;
-    if (opsPrevBtn instanceof HTMLButtonElement) opsPrevBtn.disabled = disabled;
-    if (opsNextBtn instanceof HTMLButtonElement) opsNextBtn.disabled = disabled;
-  };
-
-  const updatePosition = () => {
-    const baseOffset = slides[0]?.offsetLeft || 0;
-    const activeOffset = slides[currentIndex]?.offsetLeft || baseOffset;
-    const delta = activeOffset - baseOffset;
-    opsTrackEl.style.transform = `translate3d(${-delta}px, 0, 0)`;
-
-    slides.forEach((slide, index) => {
-      slide.classList.toggle('is-active', index >= currentIndex && index < currentIndex + perView);
-    });
-
-    if (opsDotsEl instanceof HTMLElement) {
-      opsDotsEl.querySelectorAll('.ops-dot').forEach((dot, dotIndex) => {
-        dot.classList.toggle('active', dotIndex === currentIndex);
-      });
-    }
-  };
-
-  const updateLayout = () => {
-    perView = getPerView();
-    maxIndex = Math.max(0, slides.length - perView);
-    currentIndex = Math.min(currentIndex, maxIndex);
-    opsTrackEl.style.setProperty('--ops-per-view', String(perView));
-    renderDots();
-    syncButtons();
-    updatePosition();
-  };
-
-  const goTo = (nextIndex) => {
-    if (maxIndex <= 0) {
-      currentIndex = 0;
-      updatePosition();
-      return;
-    }
-
-    let target = Number(nextIndex);
-    if (!Number.isFinite(target)) target = 0;
-    if (target > maxIndex) target = 0;
-    if (target < 0) target = maxIndex;
-    currentIndex = target;
-    updatePosition();
-  };
-
-  const startAuto = () => {
-    stopAuto();
-    if (maxIndex <= 0) return;
-    autoTimer = setInterval(() => {
-      if (document.hidden || isHovered) return;
-      goTo(currentIndex + 1);
-    }, 3800);
-  };
-
-  if (opsPrevBtn instanceof HTMLButtonElement) {
-    opsPrevBtn.addEventListener('click', () => {
-      goTo(currentIndex - 1);
-      startAuto();
-    });
-  }
-
-  if (opsNextBtn instanceof HTMLButtonElement) {
-    opsNextBtn.addEventListener('click', () => {
-      goTo(currentIndex + 1);
-      startAuto();
-    });
-  }
-
-  if (opsDotsEl instanceof HTMLElement) {
-    opsDotsEl.addEventListener('click', (event) => {
-      const target = event.target;
-      if (!(target instanceof HTMLButtonElement)) return;
-      const index = Number(target.dataset.opsIndex);
-      if (!Number.isFinite(index)) return;
-      goTo(index);
-      startAuto();
-    });
-  }
-
-  opsShowcaseEl.addEventListener('mouseenter', () => {
-    isHovered = true;
-  });
-  opsShowcaseEl.addEventListener('mouseleave', () => {
-    isHovered = false;
-  });
-
-  window.addEventListener('resize', () => {
-    if (resizeRaf) cancelAnimationFrame(resizeRaf);
-    resizeRaf = requestAnimationFrame(updateLayout);
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) return;
-    startAuto();
-  });
-
-  updateLayout();
-  startAuto();
-}
-
 function setupEvents() {
   if (categoryFiltersEl) {
     categoryFiltersEl.addEventListener('click', (event) => {
@@ -916,7 +763,6 @@ async function boot() {
   applyImageFallback();
   renderLiveRows([], 'Loading live data...');
   setupHeroVideoPlayback();
-  setupOperationsShowcaseSlider();
   setupReveal();
   setupEvents();
   renderCart();
