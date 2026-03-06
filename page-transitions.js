@@ -81,6 +81,7 @@
   }
 
   function ensureBackButton() {
+    if (document.body.classList.contains('home-page')) return;
     if (document.querySelector('[data-back-btn]')) return;
 
     const navShell = document.querySelector('.site-header .nav-shell');
