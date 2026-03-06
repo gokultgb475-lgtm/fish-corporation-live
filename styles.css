@@ -3231,3 +3231,16 @@ tbody tr:hover {
     transform: none;
   }
 }
+
+/* Force mission/capability panels to stack one-by-one and use full width */
+.home-page .hero-data {
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-width: none;
+  gap: clamp(0.95rem, 1.8vw, 1.35rem);
+  margin-top: clamp(1rem, 2.1vw, 1.8rem);
+}
+
+.home-page .hero-data .panel {
+  width: 100%;
+}
