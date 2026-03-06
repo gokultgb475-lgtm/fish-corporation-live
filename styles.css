@@ -3096,3 +3096,121 @@ tbody tr:hover {
     height: 2px;
   }
 }
+
+/* Modern technology/services card section */
+.tech-services-section {
+  width: 100%;
+  padding: clamp(1.2rem, 3.6vw, 2.8rem) 1rem 0;
+}
+
+.tech-services-wrap {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.tech-services-title {
+  margin: 0 0 clamp(0.95rem, 2.1vw, 1.45rem);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+  letter-spacing: 0.01em;
+  color: #14324b;
+}
+
+.tech-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.8vw, 1.35rem);
+}
+
+.tech-service-card {
+  border-radius: 18px;
+  border: 1px solid #e2ecf5;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(8, 32, 54, 0.1);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.tech-service-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #eaf3fa;
+}
+
+.tech-service-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.tech-service-card h3 {
+  margin: 0;
+  padding: 0.95rem 1rem 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+  font-weight: 600;
+  color: #18364c;
+}
+
+.tech-service-card:hover,
+.tech-service-card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: 0 22px 42px rgba(6, 31, 54, 0.2);
+}
+
+.tech-service-card:hover .tech-service-media img,
+.tech-service-card:focus-within .tech-service-media img {
+  transform: scale(1.05);
+}
+
+.tech-services-grid .tech-service-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.36s ease,
+    transform 0.36s ease,
+    box-shadow 0.35s ease;
+}
+
+.tech-services-section.visible .tech-service-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tech-services-section.visible .tech-service-card:nth-child(1) { transition-delay: 60ms; }
+.tech-services-section.visible .tech-service-card:nth-child(2) { transition-delay: 110ms; }
+.tech-services-section.visible .tech-service-card:nth-child(3) { transition-delay: 160ms; }
+.tech-services-section.visible .tech-service-card:nth-child(4) { transition-delay: 210ms; }
+.tech-services-section.visible .tech-service-card:nth-child(5) { transition-delay: 260ms; }
+.tech-services-section.visible .tech-service-card:nth-child(6) { transition-delay: 310ms; }
+
+@media (max-width: 1024px) {
+  .tech-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .tech-services-section {
+    padding-inline: 0.85rem;
+  }
+
+  .tech-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-service-card,
+  .tech-service-media img {
+    transition: none !important;
+  }
+
+  .tech-services-grid .tech-service-card {
+    opacity: 1;
+    transform: none;
+  }
+}
