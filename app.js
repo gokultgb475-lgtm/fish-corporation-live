@@ -767,14 +767,20 @@ async function boot() {
   setupEvents();
   renderCart();
 
-  await Promise.all([
-    loadOverview(),
-    loadProducts(),
-    loadCommunity(),
-    loadLiveBoard()
-  ]);
+  const hasProductSection = Boolean(categoryFiltersEl || productGridEl);
+  const hasCommunitySection = Boolean(postGridEl || testimonialListEl);
+  const hasLiveBoardSection = Boolean(liveRowsEl || liveMetaEl || liveSourceEl || liveRegionEl || livePulseEl);
 
-  setInterval(loadLiveBoard, 12000);
+  const startupTasks = [loadOverview()];
+  if (hasProductSection) startupTasks.push(loadProducts());
+  if (hasCommunitySection) startupTasks.push(loadCommunity());
+  if (hasLiveBoardSection) startupTasks.push(loadLiveBoard());
+
+  await Promise.all(startupTasks);
+
+  if (hasLiveBoardSection) {
+    setInterval(loadLiveBoard, 12000);
+  }
 }
 
 boot();
