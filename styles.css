@@ -3133,16 +3133,20 @@ tbody tr:hover {
 }
 
 .tech-service-media {
-  aspect-ratio: 16 / 10;
+  height: clamp(240px, 26vw, 360px);
   overflow: hidden;
-  background: #eaf3fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #eef5fb, #e4edf7);
 }
 
 .tech-service-media img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.35s ease;
 }
 
