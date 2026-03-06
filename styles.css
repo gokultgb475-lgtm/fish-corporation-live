@@ -2664,3 +2664,120 @@ tbody tr:hover {
     font-size: clamp(0.94rem, 4.1vw, 1.12rem);
   }
 }
+
+/* Full-width layout + unified Apple-style card system */
+:root {
+  --apple-card-bg: #fbfbfd;
+  --apple-card-border: #e5e9f0;
+  --apple-card-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+  --apple-card-shadow-hover: 0 16px 36px rgba(15, 23, 42, 0.14);
+}
+
+.shell {
+  width: 100%;
+  max-width: none;
+  padding-inline: clamp(1rem, 2.3vw, 2.6rem);
+}
+
+.stack {
+  width: 100%;
+  max-width: none;
+}
+
+.site-header {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.home-page .nav-shell,
+.detail-header .nav-shell {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.hero-cinema,
+.page-hero.hero-cinema {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+  border-radius: 0;
+  min-height: 100svh;
+}
+
+@supports (height: 100dvh) {
+  .hero-cinema,
+  .page-hero.hero-cinema {
+    min-height: 100dvh;
+  }
+}
+
+.panel,
+.panel-inner,
+.metric-card,
+.product-card,
+.ecosystem-card,
+.tech-card,
+.post-card,
+.testimonial-card,
+.faq-list details,
+.ops-showcase {
+  border-radius: 24px;
+  border: 1px solid var(--apple-card-border);
+  background: var(--apple-card-bg);
+  box-shadow: var(--apple-card-shadow);
+}
+
+.panel:hover,
+.product-card:hover,
+.ecosystem-card:hover,
+.tech-card:hover,
+.post-card:hover,
+.testimonial-card:hover {
+  box-shadow: var(--apple-card-shadow-hover);
+}
+
+.product-card img,
+.ecosystem-card img,
+.tech-card img,
+.post-thumb,
+.testimonial-thumb {
+  border-radius: 18px;
+  border: 0;
+  background: #ffffff;
+}
+
+.product-body,
+.ecosystem-card,
+.tech-card,
+.post-card,
+.testimonial-card {
+  padding: 1rem;
+}
+
+.ops-showcase {
+  padding: 1.12rem;
+}
+
+@media (max-width: 980px) {
+  .shell {
+    padding-inline: 1rem;
+  }
+
+  .panel,
+  .panel-inner,
+  .metric-card,
+  .product-card,
+  .ecosystem-card,
+  .tech-card,
+  .post-card,
+  .testimonial-card,
+  .faq-list details,
+  .ops-showcase {
+    border-radius: 20px;
+  }
+}
