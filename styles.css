@@ -3148,11 +3148,19 @@ tbody tr:hover {
 
 .tech-service-card h3 {
   margin: 0;
-  padding: 0.95rem 1rem 1.1rem;
+  padding: 0.95rem 1rem 0.32rem;
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.98rem, 1.3vw, 1.12rem);
   font-weight: 600;
   color: #18364c;
+}
+
+.tech-service-card p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #4a6578;
 }
 
 .tech-service-card:hover,
