@@ -3121,6 +3121,7 @@ tbody tr:hover {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.9rem, 1.8vw, 1.35rem);
+  align-items: start;
 }
 
 .tech-service-card {
