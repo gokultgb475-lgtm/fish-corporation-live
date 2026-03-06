@@ -1,7 +1,7 @@
 # Bestfishi Freshwater Website (Remodeled)
 
 Project path:
-`/home/gokulspr/My project/fish-corporation-live`
+C:\My project\fish-corporation-live-main
 
 ## Implemented
 - Full real-world freshwater aquaculture UI redesign with richer animations
