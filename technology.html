@@ -11,37 +11,122 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/detail-pages.css" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
-  <header class="shell topbar reveal">
-    <a class="brand" href="/"><img src="/images/bestfishi-pro-logo.svg" alt="Bestfishi logo" /><span class="brand-name">Bestfishi</span></a>
-    <div class="top-actions">
-      <button class="btn btn-light" type="button" data-back-btn>Back</button>
+<body class="technology-page">
+  <header class="site-header detail-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Bestfishi home">
+        <span class="brand-dot" aria-hidden="true">*</span>
+        <span class="brand-name">bestfishi</span>
+        <span class="brand-reg" aria-hidden="true">&reg;</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/ecosystem.html">Ecosystem</a>
+        <a href="/marketplace.html">Marketplace</a>
+        <a href="/technology.html">Technology</a>
+        <a href="/community.html">Community</a>
+      </nav>
+      <div class="top-actions">
+        <button class="btn btn-light" type="button" data-back-btn>Back</button>
+      </div>
     </div>
   </header>
 
-  <section class="shell hero hero-technology reveal">
-    <h1>Technology</h1>
-    <p>Data-driven freshwater operations using IoT sensing, AI forecasting, and analytics dashboards.</p>
+  <section class="hero-cinema page-hero page-hero-technology reveal" aria-label="Technology hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-cinema-content">
+      <div class="hero-copy">
+        <p class="eyebrow">Technology Control Center</p>
+        <h1>
+          AI, IoT, And Analytics
+          <span>For Freshwater Ops</span>
+        </h1>
+        <p>
+          Operational visibility across ponds, transport, and market signals with one data-driven
+          decision stack.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/ai-iot-monitoring.html">Open AI + IoT Monitoring</a>
+          <a class="btn btn-light btn-ghost" href="/marketplace.html">Go To Marketplace</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <main class="shell stack">
-    <section class="card reveal">
-      <h2>Operational Tech Stack</h2>
-      <div class="grid cols-3">
-        <article class="feature"><img src="/images/freshwater/photos/silver-carp.jpg" alt="IoT pond monitoring" /><h3>IoT Pond Monitoring</h3><p>Live tracking of oxygen, temperature, and water indicators.</p></article>
-        <article class="feature"><img src="/images/freshwater/photos/catla.jpg" alt="AI demand signals" /><h3>AI Demand Signals</h3><p>Demand-aware price and dispatch guidance for daily operations.</p></article>
-        <article class="feature"><img src="/images/freshwater/photos/tilapia.jpg" alt="Biometric analytics" /><h3>Biometric Analytics</h3><p>Performance and growth analytics to reduce risk and wastage.</p></article>
+    <section class="panel reveal">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Operational Stack</p>
+          <h2>Core Technology Modules</h2>
+        </div>
+      </div>
+      <div class="tech-grid">
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/silver-carp.jpg" alt="IoT pond monitoring" loading="lazy" />
+          <h3>IoT Pond Monitoring</h3>
+          <p>Live oxygen, temperature, and water-quality telemetry for daily farm control.</p>
+        </article>
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/catla.jpg" alt="AI demand signals" loading="lazy" />
+          <h3>AI Demand Signals</h3>
+          <p>Demand-aware pricing and dispatch recommendations aligned to market movement.</p>
+        </article>
+        <article class="tech-card">
+          <img src="/images/freshwater/photos/tilapia.jpg" alt="Biometric analytics" loading="lazy" />
+          <h3>Biometric Analytics</h3>
+          <p>Growth and health pattern analysis to reduce risk and optimize harvest timing.</p>
+        </article>
       </div>
     </section>
 
-    <section class="card reveal">
-      <h2>Advanced Monitoring</h2>
-      <p>Go deeper into AI + IoT automation and network-level monitoring models.</p>
-      <a class="btn btn-primary" href="/ai-iot-monitoring.html">Open AI + IoT Monitoring</a>
+    <section class="panel reveal split">
+      <article>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Monitoring Workflow</p>
+            <h2>From Sensor To Dispatch</h2>
+          </div>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>1. Capture Live Farm Inputs</summary>
+            <p>Collect pond oxygen, temperature, pH, and feed behavior data in near real-time.</p>
+          </details>
+          <details>
+            <summary>2. Analyze With AI Rules</summary>
+            <p>Model signals into alerts, feed recommendations, and dispatch readiness scores.</p>
+          </details>
+          <details>
+            <summary>3. Trigger Operational Action</summary>
+            <p>Route insights to farm teams, transport teams, and market operators quickly.</p>
+          </details>
+        </div>
+      </article>
+      <article class="panel-inner">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Deep Dive</p>
+            <h2>Need Advanced AI + IoT Dashboard?</h2>
+            <p class="muted">Open the dedicated monitoring page for expanded telemetry and automation context.</p>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="/ai-iot-monitoring.html">Launch Monitoring View</a>
+      </article>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <p>Bestfishi Freshwater Operations</p>
+      <div class="footer-links">
+        <a href="/ecosystem.html">Ecosystem</a>
+        <a href="/marketplace.html">Marketplace</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="/simple-page.js"></script>
   <script src="/chatbot-widget.js"></script>
